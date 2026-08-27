@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sidi Belyout — Portail Numérique de Proximité</title>
+<meta name="description" content="Portail de proximité de l'arrondissement de Sidi Belyout, Casablanca. Services, démarches, carte interactive, agenda.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.min.css">
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   1. JETONS DE DESIGN
+   ═══════════════════════════════════════════════════════════ */
+:root{
+  --navy:#0C7A5F;
+  --navy-deep:#085040;
+  --gold:#C9A227;
+  --cream:#F7F5F0;
+  --ink:#0F1D28;
+  --gray:#5A6B78;
+  --red:#B3322B;
+  --red-light:#EB7364;
+
+  /* accent piloté par l'annexe sélectionnée */
+  --accent:#C9A227;
+  --accent-ink:#8A6D10;
+
+  --bg:var(--cream);
+  --bg-raise:#FFFFFF;
+  --bg-sunk:#EFEBE2;
+  --fg:var(--ink);
+  --fg-soft:var(--gray);
+  --line:#DCD6CA;
+  --shadow:0 1px 2px rgba(15,29,40,.05), 0 8px 24px rgba(15,29,40,.06);
+  --shadow-lg:0 2px 4px rgba(15,29,40,.06), 0 20px 50px rgba(15,29,40,.12);
+
+  --r-sm:8px; --r:14px; --r-lg:22px;
+  --tap:44px;
+  --wrap:1240px;
+
+  --font-display:'Playfair Display', Georgia, serif;
+  --font-body:'Inter', system-ui, sans-serif;
+  --lh:1.6;
+}
+
+html[lang="ar"]{
+  --font-display:'Noto Naskh Arabic', serif;
+  --font-body:'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --lh:1.85;               /* l'arabe demande plus d'interligne */
+}
+
+html[data-theme="dark"]{
+  /* Fond neutre marine — indépendant de --navy/--navy-deep (le vert reste
+     réservé à la nav, au pied de page et aux blocs d'accent pleins).
+     Trois teintes de marine, de la plus profonde à la plus claire, pour
+     que sections et cartes se détachent les unes des autres. */
+  --bg:#041A2B;
+  --bg-raise:#0F3850;
+  --bg-sunk:#082439;
+  --fg:#EAF1F5;
+  --fg-soft:#93A9BC;
+  --line:#1A4560;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  --shadow-lg:0 2px 4px rgba(0,0,0,.35), 0 20px 50px rgba(0,0,0,.5);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+
+/* ═══════════════════════════════════════════════════════════
+   2. BASE
+   ═══════════════════════════════════════════════════════════ */
+body{
+  margin:0;
+  font-family:var(--font-body);
+  line-height:var(--lh);
+  color:var(--fg);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  transition:background .4s ease, color .4s ease;
+}
+
+/* Zellige en filigrane — une seule section (#annexes), concentré aux angles,
+   s'estompe vers le centre, suit l'accent de l'annexe sélectionnée */
+
+h1,h2,h3{font-family:var(--font-display); font-weight:600; line-height:1.2; margin:0}
+p{margin:0}
+a{color:inherit}
+img{max-width:100%; display:block}
+
+.wrap{width:100%; max-width:var(--wrap); margin-inline:auto; padding-inline:20px}
+
+button{font:inherit; color:inherit; cursor:pointer; border:0; background:none}
+
+:focus-visible{
+  outline:3px solid var(--navy);
+  outline-offset:3px;
+  border-radius:4px;
+}
+
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* chiffres, téléphones, horaires : toujours latins et LTR, même en arabe */
+.num{direction:ltr; unicode-bidi:embed; font-family:'Inter',system-ui,sans-serif; font-variant-numeric:tabular-nums}
+
+/* icônes directionnelles : miroir en RTL */
+html[dir="rtl"] .dir-icon{transform:scaleX(-1)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+/* ═══════════════════════════════════════════════════════════
+   3. BANDEAU URGENCES — accessible partout, sans scroll
+   ═══════════════════════════════════════════════════════════ */
+.urgences{
+  position:relative; z-index:60;
+  background:var(--red);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M24 1 47 24 24 47 1 24Z' fill='none' stroke='%23B9423C' stroke-width='1.1'/%3E%3C/svg%3E");
+  color:#fff;
+}
+.urgences__in{
+  display:flex; align-items:center; gap:8px;
+  min-height:var(--tap);
+  overflow-x:auto; scrollbar-width:none;
+}
+.urgences__in::-webkit-scrollbar{display:none}
+.urgences__label{
+  font-size:11px; font-weight:700; letter-spacing:.12em;
+  text-transform:uppercase; white-space:nowrap;
+  opacity:.9; padding-inline-end:6px;
+}
+.urg{
+  display:inline-flex; align-items:center; gap:7px;
+  min-height:36px; padding-inline:12px;
+  border-radius:999px; white-space:nowrap;
+  background:rgba(255,255,255,.14);
+  color:#fff; text-decoration:none;
+  font-size:13px; font-weight:600;
+  transition:background .2s;
+}
+.urg:hover{background:rgba(255,255,255,.26)}
+.urg b{font-size:15px; font-weight:800}
+
+/* ═══════════════════════════════════════════════════════════
+   4. EN-TÊTE
+   ═══════════════════════════════════════════════════════════ */
+.head{
+  position:sticky; top:0; z-index:50;
+  background-color:var(--navy-deep);
+  background-image:url("assets/motif-footer.png");
+  background-repeat:repeat-x; background-position:center top; background-size:auto 320px;
+  border-block-end:1px solid rgba(255,255,255,.1);
+  color:#fff;
+}
+.head__in{display:flex; align-items:center; gap:16px; min-height:66px}
+
+.brand{display:flex; align-items:center; gap:11px; text-decoration:none; margin-inline-end:auto; min-inline-size:0}
+.brand__mark{
+  flex:0 0 auto;
+  border-radius:7px;
+  background:#fff;
+  display:inline-flex; align-items:center;
+  padding:5px 9px;
+}
+.brand__mark img{block-size:24px; inline-size:auto; display:block}
+.brand__txt{display:flex; flex-direction:column; line-height:1.15; min-inline-size:0}
+.brand__name{
+  font-family:var(--font-display); font-size:17px; font-weight:700; letter-spacing:.01em; color:#fff;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-inline-size:100%;
+}
+.brand__sub{font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:rgba(255,255,255,.62)}
+html[lang="ar"] .brand__sub{letter-spacing:0; text-transform:none}
+
+/* ── Navigation : déclencheurs simples + méga-menus ─────── */
+.head__nav{display:flex; gap:4px}
+@media(max-width:900px){.head__nav{display:none}}
+
+.navtrig{
+  display:inline-flex; align-items:center;
+  min-height:var(--tap); padding-inline:14px;
+  position:relative;
+  font-size:14.5px; font-weight:600; text-decoration:none;
+  color:rgba(255,255,255,.82);
+  transition:color .15s;
+}
+.navtrig::after{
+  content:""; position:absolute; inset-inline:14px; inset-block-end:13px;
+  block-size:2px; background:rgba(255,255,255,.55);
+  transform:scaleX(0); transform-origin:center;
+  transition:transform .2s, background-color .2s;
+}
+.navtrig:hover{color:#fff}
+.navtrig:hover::after{transform:scaleX(1)}
+.navtrig[aria-expanded="true"]{color:#fff}
+.navtrig[aria-expanded="true"]::after{transform:scaleX(1); background:var(--gold)}
+
+.toggles{display:flex; gap:6px; align-items:center}
+.tog{
+  display:inline-flex; align-items:center; justify-content:center; gap:6px;
+  min-inline-size:var(--tap); min-block-size:var(--tap);
+  padding-inline:12px;
+  border:1px solid rgba(255,255,255,.28); border-radius:999px;
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  font-size:13px; font-weight:600;
+  transition:border-color .2s, background .2s;
+}
+.tog:hover{border-color:rgba(255,255,255,.55); background:rgba(255,255,255,.14)}
+.tog__short{display:none}
+@media(max-width:560px){
+  .brand__sub{display:none}
+  .tog__full{display:none}
+  .tog__short{display:inline}
+  .tog{padding-inline:10px}
+  .head__in{gap:10px}
+  .brand{gap:8px}
+  .brand__mark{padding:4px 7px}
+  .brand__mark img{block-size:20px}
+  .brand__name{font-size:15.5px}
+}
+
+/* ── Méga-menu ──────────────────────────────────────────── */
+.mega{
+  position:absolute; inset-inline:0; top:100%; z-index:49;
+  background-color:color-mix(in srgb, var(--navy-deep) 93%, transparent);
+  background-image:url("assets/motif-footer.png");
+  background-repeat:repeat-x; background-position:center top; background-size:auto 320px;
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  border-block-start:1px solid rgba(255,255,255,.14);
+  box-shadow:0 24px 48px rgba(4,26,43,.35);
+}
+.mega__in{display:flex; flex-wrap:wrap; gap:44px; padding-block:36px}
+.mega__cols{display:flex; flex-wrap:wrap; gap:52px; flex:1}
+.mega__col{display:flex; flex-direction:column; gap:2px; min-inline-size:190px}
+.mega__link{
+  display:inline-flex; align-items:center;
+  min-block-size:42px;
+  color:#fff; font-size:15px; font-weight:500; text-decoration:none;
+  opacity:.88; transition:opacity .15s;
+}
+.mega__link:hover, .mega__link:focus-visible{opacity:1; text-decoration:underline}
+.mega__dot{inline-size:8px; block-size:8px; border-radius:50%; background:var(--chip); margin-inline-end:10px; flex:0 0 auto}
+
+.mega__quick{
+  flex:0 0 280px;
+  border-inline-start:1px solid rgba(255,255,255,.18);
+  padding-inline-start:36px;
+  display:flex; flex-direction:column; gap:9px;
+}
+.mega__quickT{
+  font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  color:rgba(255,255,255,.58); margin-block-end:2px;
+}
+html[lang="ar"] .mega__quickT{letter-spacing:0; text-transform:none; font-size:13px}
+.mega__qbtn{
+  display:flex; align-items:center;
+  min-block-size:50px; padding-inline:15px;
+  border:1px solid rgba(255,255,255,.28); border-radius:var(--r-sm);
+  color:#fff; font-size:13.5px; font-weight:600; text-decoration:none;
+  background:transparent; text-align:start;
+  transition:background .15s, border-color .15s;
+}
+.mega__qbtn:hover{background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.5)}
+@media(max-width:900px){.mega{display:none}}
+
+/* ── Navigation mobile : bouton burger + panneau plein écran ── */
+.navburger{display:none}
+@media(max-width:900px){.navburger{display:inline-flex}}
+
+@media(min-width:900.02px){.mobilenav{display:none}}
+@media(max-width:900px){
+  .mobilenav{
+    position:fixed; inset-block:66px 0; inset-inline:0; z-index:48;
+    background-color:color-mix(in srgb, var(--navy-deep) 93%, transparent);
+    background-image:url("assets/motif-footer.png");
+    background-repeat:repeat-x; background-position:center top; background-size:auto 320px;
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    overflow-y:auto; -webkit-overflow-scrolling:touch;
+  }
+}
+.mobilenav__in{padding-block:14px 34px}
+
+.msec{border-block-end:1px solid rgba(255,255,255,.14)}
+.msec > summary{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  min-block-size:58px; padding-inline:2px;
+  color:#fff; font-size:16.5px; font-weight:600;
+  cursor:pointer; list-style:none;
+}
+.msec > summary::-webkit-details-marker{display:none}
+.msec > summary svg{flex:0 0 auto; transition:transform .2s; color:rgba(255,255,255,.6)}
+.msec[open] > summary svg{transform:rotate(180deg)}
+.msec__body{display:flex; flex-direction:column; padding-block-end:12px}
+.msec__body a{
+  display:flex; align-items:center; min-block-size:48px;
+  padding-inline-start:8px; color:rgba(255,255,255,.85); font-size:15px; text-decoration:none;
+}
+.msec--link{
+  display:flex; align-items:center; min-block-size:58px; padding-inline:2px;
+  color:#fff; font-size:16.5px; font-weight:600; text-decoration:none;
+  border-block-end:1px solid rgba(255,255,255,.14);
+}
+
+.mobilenav__quick{padding-block-start:22px; display:flex; flex-direction:column; gap:9px}
+.mobilenav__quickT{
+  font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  color:rgba(255,255,255,.58); margin-block-end:2px;
+}
+html[lang="ar"] .mobilenav__quickT{letter-spacing:0; text-transform:none; font-size:13px}
+
+/* ═══════════════════════════════════════════════════════════
+   5. HERO
+   ═══════════════════════════════════════════════════════════ */
+.hero{position:relative; isolation:isolate; overflow:hidden; background:var(--navy-deep)}
+.hero__media{position:absolute; inset:0; z-index:-2}
+.hero__media video,.hero__media img{inline-size:100%; block-size:100%; object-fit:cover}
+/* Repli si ni vidéo ni poster : ciel animé jour → nuit */
+.hero__sky{
+  position:absolute; inset:0; z-index:-3;
+  background:linear-gradient(180deg,#7EC0E8 0%,#B9D9EC 45%,#E8D3B0 78%,#C9A88A 100%);
+  animation:sky 22s ease-in-out infinite alternate;
+}
+@keyframes sky{
+  0%  {filter:none}
+  100%{filter:brightness(.34) saturate(.75) hue-rotate(-14deg)}
+}
+.hero::after{
+  content:""; position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(180deg, rgba(0,43,69,.42) 0%, rgba(0,43,69,.62) 46%, rgba(4,26,43,.94) 100%);
+}
+.hero__in{padding-block:94px 54px; color:#fff; position:relative}
+@media(max-width:640px){.hero__in{padding-block:60px 42px}}
+
+.eyebrow{
+  display:inline-flex; align-items:center;
+  font-size:11px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--red); margin-block-end:18px;
+  padding-inline-start:11px;
+  border-inline-start:3px solid currentColor;
+}
+html[data-theme="dark"] .eyebrow{color:var(--red-light)}
+.hero .eyebrow{color:var(--red-light)}
+html[lang="ar"] .eyebrow{letter-spacing:0; text-transform:none; font-size:13px}
+
+.hero h1{font-size:clamp(2.3rem,6vw,4.1rem); color:#fff; letter-spacing:-.015em}
+.hero__lead{
+  margin-block-start:16px; max-inline-size:34em;
+  font-size:clamp(1rem,2vw,1.16rem); color:rgba(255,255,255,.8);
+}
+
+.hero__note{
+  margin-block-start:20px; display:inline-flex; align-items:center; gap:8px;
+  font-size:12px; color:rgba(255,255,255,.62);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   6. SECTIONS
+   ═══════════════════════════════════════════════════════════ */
+section{position:relative; z-index:1}
+.sec{padding-block:96px}
+@media(max-width:640px){.sec{padding-block:64px}}
+.sec--sunk{background:var(--bg-sunk)}
+
+.sec__head{margin-block-end:40px; max-inline-size:52em}
+.sec__head h2{font-size:clamp(1.6rem,3.4vw,2.3rem)}
+.sec__head p{margin-block-start:10px; color:var(--fg-soft)}
+
+/* Zellige — médaillons en filigrane, cantonnés aux quatre coins, jamais sous le contenu.
+   #annexes (Mon quartier) et #carte partagent les mêmes deux motifs, dupliqués
+   en haut et en bas de chaque côté. */
+#annexes, #carte{position:relative; overflow:hidden}
+#annexes::before, #annexes::after,
+#carte::before, #carte::after{
+  content:""; position:absolute; z-index:-1; pointer-events:none;
+  inline-size:260px; inset-block:0;
+  background-repeat:no-repeat, no-repeat; background-size:260px 360px, 260px 360px;
+  opacity:.85;
+}
+#annexes::before, #carte::before{
+  inset-inline-start:-50px;
+  background-image:url("assets/motif-coin-left.png"), url("assets/motif-coin-left.png");
+  background-position:left top, left bottom;
+}
+#annexes::after, #carte::after{
+  inset-inline-end:-50px;
+  background-image:url("assets/motif-coin-right.png"), url("assets/motif-coin-right.png");
+  background-position:right top, right bottom;
+}
+html[data-theme="dark"] #annexes::before, html[data-theme="dark"] #annexes::after,
+html[data-theme="dark"] #carte::before, html[data-theme="dark"] #carte::after{ opacity:.3 }
+@media(max-width:900px){
+  #annexes::before, #annexes::after,
+  #carte::before, #carte::after{ display:none }
+}
+#annexes .sec__head{background:var(--bg)}
+
+/* Agenda et Actualités partagent la même structure : motif en filigrane dans les
+   marges gauche/droite, jamais sous les cartes. N'apparaît qu'au-delà de 1500px,
+   seule largeur où la gouttière hors .wrap (1240px) est assez large pour loger
+   le motif sans toucher les cartes. */
+#agenda, #actus{overflow:hidden}
+#agenda::before, #actus::before{
+  content:none; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background-color:var(--navy); opacity:.12;
+}
+html[data-theme="dark"] #agenda::before,
+html[data-theme="dark"] #actus::before{ background-color:var(--gold); opacity:.08; }
+@media(min-width:1500px){
+  #agenda::before, #actus::before{
+    content:"";
+    -webkit-mask-image:url("assets/motif-agenda-left.png"), url("assets/motif-agenda-right.png");
+    mask-image:url("assets/motif-agenda-left.png"), url("assets/motif-agenda-right.png");
+    -webkit-mask-repeat:no-repeat, no-repeat; mask-repeat:no-repeat, no-repeat;
+    -webkit-mask-position:left center, right center; mask-position:left center, right center;
+    -webkit-mask-size:120px auto, 120px auto; mask-size:120px auto, 120px auto;
+  }
+}
+#agenda .sec__head{background:var(--bg)}
+#actus .sec__head{background:var(--bg-sunk)}
+
+/* ── Panneau annexe ─────────────────────────────────────── */
+/* ── Cartes de sélection — carte claire, photo encadrée, nom en dessous ── */
+.qcards{display:grid; grid-template-columns:repeat(6,1fr); gap:12px}
+@media(max-width:900px){.qcards{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:520px){.qcards{grid-template-columns:repeat(2,1fr)}}
+.qcard{
+  display:flex; flex-direction:column;
+  padding:7px; border-radius:var(--r-lg);
+  border:2px solid transparent;
+  background:var(--bg-raise); box-shadow:var(--shadow);
+  transition:transform .2s cubic-bezier(.2,.8,.2,1), border-color .2s;
+}
+.qcard:hover{transform:translateY(-3px)}
+.qcard[aria-pressed="true"]{border-color:var(--chip)}
+.qcard__frame{display:block; aspect-ratio:4/3; border-radius:var(--r); overflow:hidden}
+.qcard__img{inline-size:100%; block-size:100%; object-fit:cover; display:block}
+.qcard__foot{display:flex; align-items:center; justify-content:space-between; gap:6px; padding:9px 5px 3px}
+.qcard__name{font-size:12.5px; font-weight:600; line-height:1.25; text-align:start; color:var(--fg)}
+.qcard__check{
+  flex:0 0 auto; inline-size:18px; block-size:18px; border-radius:50%;
+  background:var(--chip); color:#fff;
+  display:none; align-items:center; justify-content:center;
+}
+.qcard[aria-pressed="true"] .qcard__check{display:flex}
+
+/* ── Panneau de contenu — fond clair, uni (le zellige reste réservé
+   aux bandeaux et aux coins de section, pas à cette carte) ── */
+.qpanel{
+  margin-block-start:14px; padding:22px 24px;
+  border:1px solid var(--line); border-radius:var(--r-lg);
+  background:var(--bg-raise); box-shadow:var(--shadow);
+}
+.qpanel__top{display:flex; flex-wrap:wrap; align-items:center; gap:14px}
+.qpanel__badge{
+  inline-size:42px; block-size:42px; flex:0 0 42px;
+  border-radius:50%;
+  border:1.5px solid var(--accent);
+  background:color-mix(in srgb, var(--accent) 12%, var(--bg-raise));
+  display:grid; place-items:center;
+  font-family:var(--font-display); font-size:16px; font-weight:700; color:var(--accent-ink);
+  transition:border-color .45s ease, background-color .45s ease, color .45s ease;
+}
+html[data-theme="dark"] .qpanel__badge{color:var(--accent); background:color-mix(in srgb, var(--accent) 18%, var(--bg-raise))}
+.qpanel__txt{min-inline-size:0}
+.qpanel__ttl{font-size:1.35rem}
+.qpanel__desc{font-size:13.5px; color:var(--fg-soft); margin-block-start:2px}
+.qpanel__count{
+  margin-inline-start:auto; font-size:13px; font-weight:600;
+  color:var(--accent-ink); white-space:nowrap;
+}
+html[data-theme="dark"] .qpanel__count{color:var(--accent)}
+
+/* flex plutôt que grid 4 colonnes fixes : la plupart des annexes n'ont
+   pas 4 catégories réelles, et une grille figée laisse des cases vides */
+.qpanel__quick{display:flex; flex-wrap:wrap; gap:10px; margin-block-start:20px}
+.qbtn{
+  flex:1 1 130px; max-inline-size:220px;
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  padding:16px 10px; border-radius:var(--r);
+  border:1px solid var(--line); background:var(--bg);
+  text-align:center; transition:border-color .2s, background-color .2s;
+}
+.qbtn:hover{border-color:var(--accent)}
+.qbtn[aria-pressed="true"]{border-color:var(--accent); background:color-mix(in srgb, var(--accent) 9%, var(--bg))}
+.qbtn__ico{
+  inline-size:36px; block-size:36px; border-radius:50%;
+  display:grid; place-items:center;
+  border:1.5px solid color-mix(in srgb, var(--accent) 55%, var(--line));
+  color:var(--accent-ink);
+  transition:border-color .45s ease, color .45s ease;
+}
+html[data-theme="dark"] .qbtn__ico{color:var(--accent)}
+.qbtn__label{font-size:12px; font-weight:600; line-height:1.3}
+
+.annexe{
+  margin-block-start:14px;
+  border:1px solid var(--line); border-radius:var(--r-lg);
+  background:var(--bg-raise); box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.annexe__body{display:grid; grid-template-columns:1fr 1fr; gap:0}
+@media(max-width:880px){.annexe__body{grid-template-columns:1fr}}
+.annexe__list{max-block-size:430px; overflow-y:auto}
+.annexe__map{position:relative; min-block-size:330px; border-inline-start:1px solid var(--line)}
+@media(max-width:880px){.annexe__map{border-inline-start:0; border-block-start:1px solid var(--line)}}
+.annexe__map #anMap{position:absolute; inset:0}
+
+.mapreset{
+  position:absolute; inset-block-start:12px; inset-inline-end:12px; z-index:600;
+  display:inline-flex; align-items:center; justify-content:center;
+  inline-size:36px; block-size:36px;
+  border-radius:var(--r-sm); border:1px solid var(--line);
+  background:var(--bg-raise); color:var(--fg-soft);
+  box-shadow:var(--shadow);
+  transition:color .18s, border-color .18s;
+}
+.mapreset:hover{color:var(--accent-ink); border-color:var(--accent)}
+html[data-theme="dark"] .mapreset:hover{color:var(--accent)}
+
+/* ── Ligne service — liste éditoriale, séparateurs fins plutôt
+   que des blocs de couleur (registre institutionnel, pas dashboard) ── */
+.row{
+  inline-size:100%;
+  display:flex; align-items:center; gap:13px;
+  min-block-size:var(--tap);
+  padding:13px 20px;
+  text-align:start;
+  border-block-end:1px solid var(--line);
+  transition:background .18s;
+}
+.annexe__list .row:last-child{border-block-end:0}
+.row:hover{background:var(--bg-sunk)}
+.row__ico{
+  inline-size:34px; block-size:34px; flex:0 0 34px;
+  border-radius:50%; display:grid; place-items:center;
+  border:1.5px solid color-mix(in srgb, var(--accent) 55%, var(--line));
+  color:var(--accent-ink);
+  transition:border-color .45s ease, color .45s ease;
+}
+html[data-theme="dark"] .row__ico{color:var(--accent)}
+.row__txt{min-inline-size:0; flex:1}
+.row__name{font-size:14.5px; font-weight:600; line-height:1.35}
+.row__meta{
+  font-size:12.5px; color:var(--fg-soft);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.row__go{color:var(--fg-soft); flex:0 0 auto}
+
+.empty{padding:40px 20px; text-align:center; color:var(--fg-soft); font-size:14px}
+
+/* ── Filtres ────────────────────────────────────────────── */
+.filters{display:flex; flex-wrap:wrap; gap:8px; margin-block-end:18px}
+.filt{
+  display:inline-flex; align-items:center; gap:7px;
+  min-block-size:38px; padding-inline:14px;
+  border:1px solid var(--line); border-radius:999px;
+  background:var(--bg-raise);
+  font-size:13px; font-weight:500;
+  transition:border-color .2s, background .2s, color .2s;
+}
+.filt:hover{border-color:var(--navy)}
+.filt[aria-pressed="true"]{background:var(--navy); border-color:var(--navy); color:#fff}
+
+.search{
+  position:relative; margin-block-end:16px;
+  display:flex; align-items:center; gap:10px;
+  min-block-size:52px; padding-inline:18px;
+  border:1px solid var(--line); border-radius:999px;
+  background:var(--bg-raise);
+}
+.search:focus-within{border-color:var(--navy)}
+.search input{
+  flex:1; border:0; background:none; outline:none;
+  font:inherit; font-size:15px; color:var(--fg);
+  min-inline-size:0;
+}
+.search input::placeholder{color:var(--fg-soft)}
+
+/* ── Carte ──────────────────────────────────────────────── */
+#map{
+  block-size:520px; border-radius:var(--r-lg);
+  border:1px solid var(--line); overflow:hidden; z-index:1;
+}
+@media(max-width:640px){#map{block-size:400px}}
+.leaflet-container{font-family:var(--font-body); background:var(--bg-sunk)}
+html[data-theme="dark"] .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.92)}
+
+.pin{
+  inline-size:32px; block-size:32px;
+  border-radius:50% 50% 50% 2px;
+  transform:rotate(-45deg);
+  display:grid; place-items:center;
+  border:2px solid #fff;
+  box-shadow:0 3px 10px rgba(0,0,0,.32);
+}
+.pin > *{transform:rotate(45deg)}
+.pin--annexe{border-width:3px}
+
+/* ── Regroupement de marqueurs (Leaflet.markercluster) ───── */
+.mcluster{position:relative; display:grid; place-items:center; border-radius:50%}
+.mcluster::before{
+  content:""; position:absolute; inset:-7px; border-radius:50%;
+  background:inherit; opacity:.22;
+}
+.mcluster__core{
+  position:relative; inline-size:100%; block-size:100%; border-radius:50%;
+  display:grid; place-items:center;
+  border:2.5px solid rgba(255,255,255,.92);
+  box-shadow:0 3px 10px rgba(4,26,43,.32);
+  background:inherit;
+  color:#fff; font-weight:700; font-family:'Inter',system-ui,sans-serif; font-variant-numeric:tabular-nums;
+}
+.mcluster--sm{background:var(--navy); font-size:13px}
+.mcluster--md{background:#0A6B52; font-size:14px}
+.mcluster--lg{background:var(--navy-deep); font-size:15px}
+
+.leaflet-popup-content-wrapper{border-radius:var(--r); box-shadow:var(--shadow-lg)}
+.leaflet-popup-content{margin:14px 16px; font-family:var(--font-body)}
+.pop__c{font-size:10.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--accent-ink)}
+.pop__n{font-family:var(--font-display); font-size:15px; font-weight:600; margin-block:4px 8px; color:var(--ink)}
+.pop__b{
+  display:inline-flex; align-items:center; gap:6px;
+  min-block-size:34px; padding-inline:13px;
+  border-radius:999px; background:var(--navy); color:#fff;
+  font-size:12.5px; font-weight:600; text-decoration:none;
+}
+
+/* ── Agenda & Actualités — même grille, même carte ─────────
+   #agenda-grid (à venir) et #news (publié récemment) partagent
+   exactement la même structure : une carte vedette + une liste. */
+.agenda{display:grid; grid-template-columns:1.3fr 1fr; gap:14px; align-items:start}
+@media(max-width:880px){.agenda{grid-template-columns:1fr}}
+.ag{
+  display:flex; flex-direction:row; align-items:stretch; gap:14px; padding:22px;
+  border:1px solid var(--line); border-radius:var(--r-lg);
+  background:var(--bg-raise); position:relative; z-index:1;
+  transition:border-color .25s, transform .25s;
+}
+.ag:hover{border-color:var(--navy); transform:translateY(-3px)}
+.ag--feat{flex-direction:column; gap:16px}
+
+.ag__body{display:flex; flex-direction:column; align-items:flex-start; justify-content:center; min-inline-size:0; flex:1}
+.ag--feat .ag__body{justify-content:flex-start}
+
+/* Photo qui déborde du padding de la carte, sans jamais passer sous le texte */
+.ag__media{
+  overflow:hidden; background:var(--bg-sunk); flex:0 0 96px;
+  margin-block:-22px; margin-inline-start:-22px;
+  border-start-start-radius:var(--r-lg); border-end-start-radius:var(--r-lg);
+  border-start-end-radius:0; border-end-end-radius:0;
+}
+.ag__media img{inline-size:100%; block-size:100%; object-fit:cover; display:block}
+.ag--feat .ag__media{
+  flex:0 0 auto; aspect-ratio:16/10; inline-size:auto;
+  margin:-22px -22px 0;
+  border-start-start-radius:var(--r-lg); border-start-end-radius:var(--r-lg);
+  border-end-start-radius:0; border-end-end-radius:0;
+}
+@media(max-width:480px){
+  .ag--sm .ag__media{flex-basis:76px}
+}
+
+.ag__ico{
+  inline-size:44px; block-size:44px; flex:0 0 44px;
+  border-radius:12px; display:grid; place-items:center;
+  background:var(--navy); color:#fff;
+}
+.ag--sm .ag__ico{align-self:center}
+.ag--feat .ag__ico{inline-size:56px; block-size:56px; flex:0 0 56px; border-radius:14px}
+.ag__date{font-size:12px; font-weight:700; color:var(--red); text-transform:capitalize}
+html[data-theme="dark"] .ag__date{color:var(--red-light)}
+.ag__date .num{font-size:13.5px}
+.ag__tag{
+  display:inline-flex; align-items:center; margin-block:6px 7px;
+  font-size:10.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--red);
+  background:color-mix(in srgb, var(--red) 12%, transparent);
+  padding:3px 9px; border-radius:999px;
+  transition:background-color .45s ease, color .45s ease;
+}
+html[data-theme="dark"] .ag__tag{color:var(--red-light); background:color-mix(in srgb, var(--red-light) 16%, transparent)}
+html[lang="ar"] .ag__tag{letter-spacing:0; text-transform:none; font-size:12px}
+.ag__t{font-family:var(--font-display); font-size:1.02rem; font-weight:600; line-height:1.25}
+.ag--feat .ag__t{font-size:1.28rem}
+.ag__d{font-size:13.5px; color:var(--fg-soft); margin-block-start:4px}
+.ag--sm.ag--photo .ag__d{
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+.ag--sm.ag--photo .ag__lieu{margin-block-start:6px}
+.ag__lieu{
+  display:flex; align-items:center; gap:6px;
+  font-size:12.5px; color:var(--fg-soft); margin-block-start:10px;
+}
+.ag__lieu svg{flex:0 0 auto}
+.ag__pub{font-size:12px; color:var(--fg-soft); margin-block-start:10px}
+.ag__list{display:flex; flex-direction:column; gap:14px}
+.agenda__more{margin-block-start:24px; text-align:center}
+.agenda__btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-block-size:44px; padding-inline:20px;
+  border:1px solid var(--line); border-radius:999px;
+  font-size:13.5px; font-weight:600; color:var(--fg-soft);
+  opacity:.6;
+}
+
+.actus__more{margin-block-start:24px; text-align:center}
+.actus__btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-block-size:44px; padding-inline:22px;
+  border:1.5px solid var(--navy); border-radius:999px;
+  font-size:13.5px; font-weight:600; color:var(--navy);
+  text-decoration:none;
+  transition:background-color .18s, color .18s;
+}
+.actus__btn:hover{background:var(--navy); color:#fff}
+
+/* ── Section Projets — timelapse + panneau plein ─────────── */
+.projet{
+  display:grid; grid-template-columns:1.3fr 1fr;
+  border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow-lg);
+}
+@media(max-width:880px){.projet{grid-template-columns:1fr}}
+
+.projet__media{position:relative; background:var(--navy); aspect-ratio:16/10}
+.projet__media video{
+  position:absolute; inset:0;
+  inline-size:100%; block-size:100%; object-fit:cover; display:block;
+}
+.projet__badge{
+  position:absolute; inset-inline:0; inset-block-end:0; z-index:2;
+  display:flex; align-items:center; gap:8px;
+  padding:11px 16px;
+  background:rgba(4,26,43,.86); color:#fff;
+  font-size:12px; font-weight:600; line-height:1.4;
+  pointer-events:none;
+}
+.projet__badge svg{flex:0 0 auto; color:var(--gold)}
+
+.projet__panel{
+  background-color:var(--navy);
+  background-image:url("assets/motif-footer.png");
+  background-repeat:repeat-x; background-position:center top; background-size:auto 320px;
+  color:#fff;
+  padding:32px 36px;
+  display:flex; flex-direction:column; justify-content:center; gap:13px;
+  min-block-size:0; overflow-y:auto;
+}
+.projet__title{font-size:clamp(1.2rem,2.4vw,1.55rem); color:#fff}
+.projet__lead{font-size:13.5px; line-height:1.65; color:rgba(255,255,255,.82)}
+.projet__points{display:flex; flex-direction:column; gap:11px; margin-block-start:2px}
+.projet__point{padding-inline-start:14px; border-inline-start:3px solid var(--gold)}
+.projet__point b{display:block; font-size:13.5px; font-weight:700; color:#fff}
+.projet__point span{font-size:12.5px; line-height:1.55; color:rgba(255,255,255,.75)}
+
+/* ── Fiche service (panneau) ────────────────────────────── */
+.sheet{
+  position:fixed; inset:0; z-index:100;
+  display:none; align-items:flex-end; justify-content:center;
+}
+.sheet[open]{display:flex}
+.sheet__veil{position:absolute; inset:0; background:rgba(4,26,43,.55); backdrop-filter:blur(3px)}
+.sheet__box{
+  position:relative;
+  inline-size:min(560px,100%);
+  max-block-size:92vh; overflow-y:auto;
+  background:var(--bg-raise);
+  border-radius:var(--r-lg) var(--r-lg) 0 0;
+  box-shadow:var(--shadow-lg);
+  animation:rise .32s cubic-bezier(.2,.8,.2,1);
+}
+@media(min-width:640px){
+  .sheet{align-items:center}
+  .sheet__box{border-radius:var(--r-lg)}
+}
+@keyframes rise{from{transform:translateY(28px); opacity:0}to{transform:none; opacity:1}}
+
+.sheet__top{
+  position:sticky; top:0; z-index:2;
+  display:flex; align-items:flex-start; gap:14px;
+  padding:22px 24px 18px;
+  background:color-mix(in srgb, var(--navy) 10%, var(--bg-raise));
+  border-block-end:1px solid var(--line);
+}
+.sheet__ico{
+  inline-size:46px; block-size:46px; flex:0 0 46px;
+  border-radius:12px; display:grid; place-items:center;
+  background:var(--navy); color:#fff;
+}
+.sheet__cat{
+  display:inline-flex; align-items:center;
+  font-size:10.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--red);
+  background:color-mix(in srgb, var(--red) 12%, transparent);
+  padding:3px 9px; border-radius:999px;
+  transition:background-color .45s ease, color .45s ease;
+}
+html[data-theme="dark"] .sheet__cat{color:var(--red-light); background:color-mix(in srgb, var(--red-light) 16%, transparent)}
+html[lang="ar"] .sheet__cat{letter-spacing:0; text-transform:none; font-size:12px}
+.sheet__n{font-size:1.28rem; margin-block-start:3px}
+.sheet__x{
+  margin-inline-start:auto; flex:0 0 auto;
+  inline-size:var(--tap); block-size:var(--tap);
+  border-radius:50%; display:grid; place-items:center;
+  color:var(--fg-soft);
+}
+.sheet__x:hover{background:var(--bg-sunk)}
+
+.sheet__body{padding:20px 24px 26px}
+.info{display:flex; gap:13px; padding-block:13px; border-block-end:1px solid var(--line)}
+.info:last-of-type{border-block-end:0}
+.info__i{flex:0 0 22px; color:var(--fg-soft); padding-block-start:2px}
+.info__k{font-size:11.5px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--fg-soft)}
+html[lang="ar"] .info__k{letter-spacing:0; text-transform:none; font-size:12.5px}
+.info__v{font-size:14.5px; margin-block-start:2px}
+
+.sheet__map{block-size:190px; border-radius:var(--r); overflow:hidden; border:1px solid var(--line); margin-block:18px}
+
+.acts{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.act{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  min-block-size:52px; border-radius:var(--r);
+  font-size:14.5px; font-weight:600; text-decoration:none;
+  transition:transform .2s, opacity .2s;
+}
+.act:hover{transform:translateY(-2px)}
+.act--call{background:var(--navy); color:#fff}
+.act--go{background:var(--bg-sunk); color:var(--fg); border:1px solid var(--line)}
+.act[aria-disabled="true"]{opacity:.4; pointer-events:none}
+
+.flag{
+  display:inline-flex; align-items:center; gap:7px;
+  margin-block-start:16px; padding:9px 13px;
+  border-radius:var(--r-sm);
+  background:var(--bg-sunk);
+  border:1px solid var(--line);
+  font-size:12.5px; color:var(--fg-soft);
+}
+
+/* ── Pied de page ───────────────────────────────────────── */
+.foot{
+  background-color:var(--navy-deep);
+  background-image:url("assets/motif-footer.png");
+  background-repeat:repeat-x; background-position:center top; background-size:auto 320px;
+  color:rgba(255,255,255,.72); padding-block:44px 30px; position:relative; z-index:1;
+}
+.foot__grid{display:flex; flex-wrap:wrap; gap:30px; justify-content:space-between; align-items:flex-start}
+.foot__brand{font-family:var(--font-display); font-size:1.25rem; color:#fff}
+.foot__tag{font-size:13.5px; margin-block-start:6px; max-inline-size:26em}
+.foot__contact{display:flex; gap:28px; flex-wrap:wrap}
+.foot__col h4{
+  font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+  color:rgba(255,255,255,.5); margin-block-end:7px;
+}
+html[lang="ar"] .foot__col h4{letter-spacing:0; text-transform:none; font-size:12.5px}
+.foot__col p{font-size:12.5px; line-height:1.8}
+.foot__col a{color:#fff; text-decoration:none}
+.foot__col a:hover{text-decoration:underline}
+.foot__side{font-size:12.5px; line-height:1.9; max-inline-size:26em}
+.foot__bar{
+  margin-block-start:28px; padding-block-start:18px;
+  border-block-start:1px solid rgba(255,255,255,.13);
+  font-size:11.5px; color:rgba(255,255,255,.5);
+  display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between;
+}
+
+.foot__extra{
+  margin-block-start:28px; padding-block-start:24px;
+  border-block-start:1px solid rgba(255,255,255,.13);
+  display:flex; flex-wrap:wrap; gap:22px;
+  align-items:center; justify-content:space-between;
+}
+.foot__news{display:flex; align-items:center; gap:14px; max-inline-size:32em}
+.foot__newsIco{
+  flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;
+  inline-size:40px; block-size:40px; border-radius:50%;
+  background:rgba(255,255,255,.1); color:var(--gold);
+}
+.foot__newsTitle{font-size:13px; font-weight:600; color:#fff; margin-block-end:9px}
+.foot__newsRow{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.foot__newsBtn{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-block-size:38px; padding-inline:16px;
+  border-radius:999px; border:1px solid rgba(255,255,255,.3);
+  background:rgba(255,255,255,.08); color:rgba(255,255,255,.65);
+  font-size:12.5px; font-weight:600;
+  cursor:not-allowed;
+}
+.foot__newsSoon{
+  font-size:11px; font-weight:600; letter-spacing:.04em;
+  color:rgba(255,255,255,.55);
+  padding-inline:9px; padding-block:3px;
+  border-radius:999px; background:rgba(255,255,255,.08);
+}
+html[lang="ar"] .foot__newsSoon{letter-spacing:0}
+.foot__social{display:flex; gap:10px; flex:0 0 auto}
+.foot__socialBtn{
+  display:inline-flex; align-items:center; justify-content:center;
+  inline-size:38px; block-size:38px; border-radius:50%;
+  background:rgba(255,255,255,.1); color:#fff;
+  transition:background-color .18s, color .18s;
+}
+.foot__socialBtn:hover{background:var(--gold); color:var(--navy-deep)}
+</style>
+</head>
+
+<body>
+
+<!-- ════════ URGENCES ════════ -->
+<div class="urgences">
+  <div class="wrap urgences__in" id="urgBar">
+    <span class="urgences__label" data-t="urgences">Urgences</span>
+  </div>
+</div>
+
+<!-- ════════ EN-TÊTE ════════ -->
+<header class="head">
+  <div class="wrap head__in">
+    <a class="brand" href="#top">
+      <span class="brand__mark" aria-hidden="true">
+        <img src="assets/logo-royaume.png" alt="" width="342" height="132">
+      </span>
+      <span class="brand__txt">
+        <span class="brand__name" data-t="brand">Sidi Belyout</span>
+        <span class="brand__sub" data-t="brandSub">Portail de proximité</span>
+      </span>
+    </a>
+
+    <nav class="head__nav" aria-label="Navigation principale">
+      <button class="navtrig" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="mega-services" data-t="navServices">Services</button>
+      <div class="mega" id="mega-services" hidden></div>
+
+      <button class="navtrig" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="mega-vie" data-t="navVie">Vie locale</button>
+      <div class="mega" id="mega-vie" hidden></div>
+
+      <button class="navtrig" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="mega-annexe" data-t="navAnnexes">Mon annexe</button>
+      <div class="mega" id="mega-annexe" hidden></div>
+
+      <a class="navtrig" href="#carte" data-t="navCarte">Carte</a>
+    </nav>
+
+    <div class="toggles">
+      <button class="tog" id="langBtn" type="button" aria-label="Changer de langue">
+        <span id="langTxt" class="tog__full">العربية</span>
+        <span id="langTxtShort" class="tog__short" aria-hidden="true">AR</span>
+      </button>
+      <button class="tog" id="themeBtn" type="button" aria-label="Mode sombre">
+        <svg id="themeIco" width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <button class="tog navburger" id="navBurger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="mobileNav" aria-label="Menu">
+        <svg id="navBurgerIco" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="5" width="18" height="2" rx="1"/><rect x="3" y="11" width="18" height="2" rx="1"/><rect x="3" y="17" width="18" height="2" rx="1"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobilenav" id="mobileNav" hidden>
+    <div class="wrap mobilenav__in"></div>
+  </div>
+</header>
+
+<!-- ════════ HERO ════════ -->
+<section class="hero" id="top">
+  <div class="hero__sky" aria-hidden="true"></div>
+  <div class="hero__media" aria-hidden="true">
+    <video id="heroVid" autoplay muted loop playsinline preload="none" poster="assets/hero-poster.jpg">
+      <source src="assets/timelapse.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="wrap hero__in">
+    <span class="eyebrow" data-t="eyebrow">Arrondissement de Sidi Belyout</span>
+    <h1 data-t="heroTitle">Votre arrondissement,<br>à portée de main.</h1>
+    <p class="hero__lead" data-t="heroLead">Trouvez un service, une démarche ou un équipement près de chez vous. Appelez, ou lancez l'itinéraire.</p>
+
+    <p class="hero__note">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm1-13h-2v2h2Zm0 4h-2v6h2Z"/></svg>
+      <span data-t="heroNote">Positions des annexes provisoires — à valider par l'arrondissement.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ════════ MON ANNEXE ════════ -->
+<section class="sec" id="annexes">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="eyebrow" data-t="ebAnnexe">Mon annexe</span>
+      <h2 data-t="annexeH">Les services autour de vous</h2>
+      <p data-t="annexeP">Choisissez votre annexe ci-dessus : la liste et la carte s'adaptent immédiatement.</p>
+    </div>
+
+    <div class="qcards" id="qCards" role="group" aria-label="Choisir mon annexe"></div>
+
+    <div class="qpanel" id="qPanel">
+      <div class="qpanel__top">
+        <span class="qpanel__badge" id="anBadge">1</span>
+        <div class="qpanel__txt">
+          <h3 class="qpanel__ttl" id="anName">—</h3>
+          <p class="qpanel__desc" id="anDesc">—</p>
+        </div>
+        <span class="qpanel__count" id="anCount"></span>
+      </div>
+      <div class="qpanel__quick" id="anQuick"></div>
+    </div>
+
+    <div class="annexe">
+      <div class="annexe__body">
+        <div class="annexe__list" id="anList"></div>
+        <div class="annexe__map">
+          <div id="anMap"></div>
+          <button class="mapreset" id="anMapReset" type="button" aria-label="Réinitialiser le zoom">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4a8 8 0 1 0 8 8h-2a6 6 0 1 1-6-6V3l5 4-5 4Z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CARTE ════════ -->
+<section class="sec" id="carte">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="eyebrow" data-t="ebCarte">Carte interactive</span>
+      <h2 data-t="carteH">Localiser un service</h2>
+      <p data-t="carteP">Filtrez par catégorie ou par annexe. Cliquez sur un point pour voir sa fiche complète.</p>
+    </div>
+
+    <div class="search">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M11 4A7 7 0 1 0 11 18A7 7 0 1 0 11 4ZM11 6.5A4.5 4.5 0 1 1 11 15.5A4.5 4.5 0 1 1 11 6.5Z"/><rect x="16.4" y="19.3" width="7" height="2.4" rx="1.2" transform="rotate(-45 16.4 19.3)"/></svg>
+      <input type="search" id="q" placeholder="Rechercher un service, un équipement…" aria-label="Rechercher">
+    </div>
+
+    <div class="filters" id="catFilters" role="group" aria-label="Filtrer par catégorie"></div>
+    <div id="map"></div>
+  </div>
+</section>
+
+<!-- ════════ ACTUALITÉS ════════ -->
+<section class="sec sec--sunk" id="actus">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="eyebrow" data-t="ebActus">Actualités</span>
+      <h2 data-t="actusH">La vie de l'arrondissement</h2>
+    </div>
+    <div class="agenda" id="news"></div>
+    <div class="actus__more">
+      <a class="actus__btn" href="#actus" data-t="actusAll">Voir toutes les actualités</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ AGENDA ════════ -->
+<section class="sec" id="agenda">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="eyebrow" data-t="ebAgenda">Agenda</span>
+      <h2 data-t="agendaH">Ce qui se passe près de chez vous</h2>
+    </div>
+    <div class="agenda" id="agenda-grid"></div>
+    <div class="agenda__more">
+      <span class="agenda__btn" aria-disabled="true" data-t="agendaAll">Voir tout l'agenda</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ PROJETS ════════ -->
+<section class="sec sec--sunk" id="projets">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="eyebrow" data-t="ebProjets">Projets</span>
+      <h2 data-t="projetsH">Visualiser un aménagement avant sa réalisation</h2>
+    </div>
+
+    <div class="projet">
+      <div class="projet__media">
+        <video id="projetVid" autoplay muted loop playsinline preload="metadata" poster="assets/projet-exemple-poster.jpg">
+          <source src="assets/projet-exemple.mp4" type="video/mp4">
+        </video>
+        <span class="projet__badge">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0ZM13 9h-2v5h2Zm0 7h-2v2h2Z"/></svg>
+          <span data-t="projetBadge">Exemple de rendu — projet fictif, à titre de démonstration</span>
+        </span>
+      </div>
+      <div class="projet__panel">
+        <h3 class="projet__title" id="projTitle">—</h3>
+        <p class="projet__lead" id="projLead">—</p>
+        <div class="projet__points" id="projPoints"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ PIED ════════ -->
+<footer class="foot" id="pied">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <p class="foot__brand" data-t="brand">Sidi Belyout</p>
+        <p class="foot__tag" data-t="footTag">Votre arrondissement. Vos services. Votre proximité.</p>
+      </div>
+      <div class="foot__contact" id="footContact"></div>
+      <div class="foot__side">
+        <p data-t="footNote">Démonstration — les données affichées proviennent de sources publiques et doivent être validées par l'arrondissement avant toute mise en ligne. Les numéros d'urgence sont à vérifier.</p>
+      </div>
+    </div>
+
+    <div class="foot__extra">
+      <div class="foot__news">
+        <span class="foot__newsIco" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1.4 2L12 12.2 18.6 7ZM5 8.6V17h14V8.6l-6.4 5.1a1 1 0 0 1-1.2 0Z"/></svg>
+        </span>
+        <div class="foot__newsTxt">
+          <p class="foot__newsTitle" data-t="footNewsTitle">Recevez les actualités de l'arrondissement</p>
+          <div class="foot__newsRow">
+            <button class="foot__newsBtn" type="button" disabled aria-disabled="true" data-t="footNewsBtn">S'abonner</button>
+            <span class="foot__newsSoon" data-t="footNewsSoon">Bientôt disponible</span>
+          </div>
+        </div>
+      </div>
+      <div class="foot__social" role="group" aria-label="Réseaux sociaux">
+        <a class="foot__socialBtn" href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12Z"/></svg>
+        </a>
+        <a class="foot__socialBtn" href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM17 6.2a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z"/></svg>
+        </a>
+        <a class="foot__socialBtn" href="https://x.com" target="_blank" rel="noopener" aria-label="X">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4l7.4 8.6L4.4 20H7l5-5.8L16 20h4l-7.8-9L19.6 4H17l-4.6 5.4L8 4Z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="foot__bar">
+      <span data-t="footLegal">Maquette de présentation — non contractuelle</span>
+      <span data-t="footMentions">Mentions légales</span>
+      <span data-t="footConfid">Politique de confidentialité</span>
+      <span data-t="footTech">Carte : OpenStreetMap</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════ FICHE SERVICE ════════ -->
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="shName">
+  <div class="sheet__veil" data-close></div>
+  <div class="sheet__box">
+    <div class="sheet__top">
+      <span class="sheet__ico" id="shIco"></span>
+      <div>
+        <span class="sheet__cat" id="shCat"></span>
+        <h3 class="sheet__n" id="shName"></h3>
+      </div>
+      <button class="sheet__x" type="button" data-close aria-label="Fermer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="11" y="3" width="2" height="18" rx="1" transform="rotate(45 12 12)"/><rect x="11" y="3" width="2" height="18" rx="1" transform="rotate(-45 12 12)"/></svg>
+      </button>
+    </div>
+    <div class="sheet__body">
+      <div id="shInfos"></div>
+      <div class="sheet__map" id="shMap"></div>
+      <div class="acts">
+        <a class="act act--call" id="shCall" href="#">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.2c1.2.4 2.4.6 3.7.6a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.6 21 3 13.4 3 4a1 1 0 0 1 1-1h3.4a1 1 0 0 1 1 1c0 1.3.2 2.5.6 3.7a1 1 0 0 1-.2 1Z"/></svg>
+          <span data-t="call">Appeler</span>
+        </a>
+        <a class="act act--go" id="shGo" href="#" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 11 22 2l-9 19-2-8-8-2z"/></svg>
+          <span data-t="route">Voir l'itinéraire</span>
+        </a>
+      </div>
+      <div class="flag" id="shFlag" hidden>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0ZM13 9h-2v5h2Zm0 7h-2v2h2Z"/></svg>
+        <span data-t="toValidate">Information à valider par l'arrondissement</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js"></script>
+<script src="seed.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

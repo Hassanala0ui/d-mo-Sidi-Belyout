@@ -1,0 +1,3 @@
+[ 1857754ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8745/assets/agenda/forum-associations.jpg:0
+[ 1857754ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8745/assets/agenda/tournoi-sport.jpg:0
+[ 1857816ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8745/assets/agenda/journee-familiale.jpg:0

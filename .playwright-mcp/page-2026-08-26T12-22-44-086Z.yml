@@ -1,0 +1,196 @@
+- generic [ref=f5e1]:
+  - generic [ref=f5e3]:
+    - generic [ref=f5e4]: Urgences
+    - link "Police secours 19" [ref=f5e647] [cursor=pointer]:
+      - /url: tel:19
+      - generic [ref=f5e648]: Police secours
+      - generic [ref=f5e649]: "19"
+    - link "Protection civile 15" [ref=f5e650] [cursor=pointer]:
+      - /url: tel:15
+      - generic [ref=f5e651]: Protection civile
+      - generic [ref=f5e652]: "15"
+    - link "Gendarmerie royale 177" [ref=f5e653] [cursor=pointer]:
+      - /url: tel:177
+      - generic [ref=f5e654]: Gendarmerie royale
+      - generic [ref=f5e655]: "177"
+  - banner [ref=f5e14]:
+    - generic [ref=f5e15]:
+      - link "Sidi Belyout Portail de proximité" [ref=f5e656] [cursor=pointer]:
+        - /url: "#top"
+        - generic [ref=f5e20]:
+          - generic [ref=f5e21]: Sidi Belyout
+          - generic [ref=f5e22]: Portail de proximité
+      - navigation "Navigation principale" [ref=f5e23]:
+        - link "Mon annexe" [ref=f5e657] [cursor=pointer]:
+          - /url: "#annexes"
+        - link "Rubriques" [ref=f5e658] [cursor=pointer]:
+          - /url: "#rubriques"
+        - link "Carte" [ref=f5e659] [cursor=pointer]:
+          - /url: "#carte"
+        - link "Actualités" [ref=f5e660] [cursor=pointer]:
+          - /url: "#actus"
+      - generic [ref=f5e28]:
+        - button "Changer de langue" [ref=f5e29] [cursor=pointer]:
+          - generic [ref=f5e30]: العربية
+        - button "Mode clair" [active] [ref=f5e925] [cursor=pointer]
+  - generic [ref=f5e37]:
+    - generic [ref=f5e38]: Arrondissement de Sidi Belyout
+    - heading "Votre arrondissement, à portée de main." [level=1] [ref=f5e662]: Votre arrondissement,à portée de main.
+    - paragraph [ref=f5e40]: Trouvez un service, une démarche ou un équipement près de chez vous. Appelez, ou lancez l'itinéraire.
+    - generic [ref=f5e41]:
+      - paragraph [ref=f5e42]: "Je suis à :"
+      - group "Choisir mon annexe" [ref=f5e43]:
+        - button "01 Bousmara" [pressed] [ref=f5e663] [cursor=pointer]:
+          - generic [ref=f5e664]: "01"
+          - generic [ref=f5e665]: Bousmara
+        - button "02 Lalla Yacout" [ref=f5e666] [cursor=pointer]:
+          - generic [ref=f5e667]: "02"
+          - generic [ref=f5e668]: Lalla Yacout
+        - button "03 Ben Jdia" [ref=f5e669] [cursor=pointer]:
+          - generic [ref=f5e670]: "03"
+          - generic [ref=f5e671]: Ben Jdia
+        - button "04 Moussa Bnou Noussair" [ref=f5e672] [cursor=pointer]:
+          - generic [ref=f5e673]: "04"
+          - generic [ref=f5e674]: Moussa Bnou Noussair
+        - button "05 Moulay Youssef" [ref=f5e675] [cursor=pointer]:
+          - generic [ref=f5e676]: "05"
+          - generic [ref=f5e677]: Moulay Youssef
+        - button "06 Sour Jdid" [ref=f5e678] [cursor=pointer]:
+          - generic [ref=f5e679]: "06"
+          - generic [ref=f5e680]: Sour Jdid
+    - paragraph [ref=f5e62]:
+      - generic [ref=f5e66]: Positions des annexes provisoires — à valider par l'arrondissement.
+  - generic [ref=f5e68]:
+    - generic [ref=f5e69]:
+      - generic [ref=f5e70]: Mon annexe
+      - heading "Les services autour de vous" [level=2] [ref=f5e681]
+      - paragraph [ref=f5e72]: "Choisissez votre annexe ci-dessus : la liste et la carte s'adaptent immédiatement."
+    - generic [ref=f5e73]:
+      - generic [ref=f5e74]:
+        - generic [ref=f5e75]: "1"
+        - generic [ref=f5e76]:
+          - heading "Bousmara" [level=3] [ref=f5e682]
+          - paragraph [ref=f5e78]: Secteur central, à proximité immédiate du centre-ville historique et des grands axes.
+        - generic [ref=f5e79]: 2 services
+      - generic [ref=f5e80]:
+        - generic [ref=f5e81]:
+          - button "Siège de la Protection Civile Secours · Centre-ville, Casablanca" [ref=f5e683] [cursor=pointer]
+          - button "Parking Borj Al Yassamin Parkings · 27 rue Ouled Ziane, Casablanca" [ref=f5e691] [cursor=pointer]
+        - generic [ref=f5e98]:
+          - generic:
+            - generic:
+              - button [ref=f5e699] [cursor=pointer]
+              - button [ref=f5e704] [cursor=pointer]
+              - button [ref=f5e709] [cursor=pointer]
+  - generic [ref=f5e115]:
+    - generic [ref=f5e116]:
+      - generic [ref=f5e117]: Architecture du portail
+      - heading "Tout Sidi Belyout, au même endroit" [level=2] [ref=f5e714]
+      - paragraph [ref=f5e119]: Neuf rubriques pensées comme un écosystème cohérent, pas une succession de pages isolées.
+    - generic [ref=f5e120]:
+      - button "Mon annexe Les 6 annexes et leurs services de proximité." [ref=f5e715] [cursor=pointer]:
+        - generic [ref=f5e719]: Mon annexe
+        - generic [ref=f5e720]: Les 6 annexes et leurs services de proximité.
+      - button "Services à proximité Police, pompiers, santé, administrations." [ref=f5e721] [cursor=pointer]:
+        - generic [ref=f5e726]: Services à proximité
+        - generic [ref=f5e727]: Police, pompiers, santé, administrations.
+      - button "Mes démarches Informations pratiques sur les démarches." [ref=f5e728] [cursor=pointer]:
+        - generic [ref=f5e733]: Mes démarches
+        - generic [ref=f5e734]: Informations pratiques sur les démarches.
+      - button "Famille & enfants Activités, jardins, aires de jeux, écoles." [ref=f5e735] [cursor=pointer]:
+        - generic [ref=f5e741]: Famille & enfants
+        - generic [ref=f5e742]: Activités, jardins, aires de jeux, écoles.
+      - button "Culture & sport Centres culturels, équipements sportifs." [ref=f5e743] [cursor=pointer]:
+        - generic [ref=f5e747]: Culture & sport
+        - generic [ref=f5e748]: Centres culturels, équipements sportifs.
+      - button "Actualités Informations, travaux, campagnes." [ref=f5e749] [cursor=pointer]:
+        - generic [ref=f5e754]: Actualités
+        - generic [ref=f5e755]: Informations, travaux, campagnes.
+      - button "Agenda Événements culturels, sportifs, familiaux." [ref=f5e756] [cursor=pointer]:
+        - generic [ref=f5e761]: Agenda
+        - generic [ref=f5e762]: Événements culturels, sportifs, familiaux.
+      - button "Contacts utiles Contacts essentiels et services d'urgence." [ref=f5e763] [cursor=pointer]:
+        - generic [ref=f5e767]: Contacts utiles
+        - generic [ref=f5e768]: Contacts essentiels et services d'urgence.
+      - button "Carte interactive Localiser tous les services et équipements." [ref=f5e769] [cursor=pointer]:
+        - generic [ref=f5e774]: Carte interactive
+        - generic [ref=f5e775]: Localiser tous les services et équipements.
+  - generic [ref=f5e183]:
+    - generic [ref=f5e184]:
+      - generic [ref=f5e185]: Carte interactive
+      - heading "Localiser un service" [level=2] [ref=f5e776]
+      - paragraph [ref=f5e187]: Filtrez par catégorie ou par annexe. Cliquez sur un point pour voir sa fiche complète.
+    - searchbox "Rechercher" [ref=f5e192]
+    - group "Filtrer par catégorie" [ref=f5e193]:
+      - button "Toutes" [pressed] [ref=f5e777] [cursor=pointer]
+      - button "Administration" [ref=f5e779] [cursor=pointer]
+      - button "Police" [ref=f5e783] [cursor=pointer]
+      - button "Secours" [ref=f5e787] [cursor=pointer]
+      - button "Santé" [ref=f5e791] [cursor=pointer]
+      - button "Culture" [ref=f5e795] [cursor=pointer]
+      - button "Sport" [ref=f5e799] [cursor=pointer]
+      - button "Jardins" [ref=f5e803] [cursor=pointer]
+      - button "Éducation" [ref=f5e807] [cursor=pointer]
+      - button "Parkings" [ref=f5e811] [cursor=pointer]
+      - button "Transport" [ref=f5e815] [cursor=pointer]
+    - generic [ref=f5e236]:
+      - generic:
+        - generic:
+          - button [ref=f5e819] [cursor=pointer]
+          - button [ref=f5e824] [cursor=pointer]
+          - button [ref=f5e829] [cursor=pointer]
+          - button [ref=f5e834] [cursor=pointer]
+          - button [ref=f5e839] [cursor=pointer]
+          - button [ref=f5e844] [cursor=pointer]
+          - button [ref=f5e849] [cursor=pointer]
+          - button [ref=f5e854] [cursor=pointer]
+          - button [ref=f5e859] [cursor=pointer]
+          - button [ref=f5e864] [cursor=pointer]
+          - button [ref=f5e869] [cursor=pointer]
+          - button [ref=f5e874] [cursor=pointer]
+          - button [ref=f5e879] [cursor=pointer]
+          - button [ref=f5e884] [cursor=pointer]
+          - button [ref=f5e889] [cursor=pointer]
+          - button [ref=f5e894] [cursor=pointer]
+          - button [ref=f5e899] [cursor=pointer]
+          - button [ref=f5e904] [cursor=pointer]
+      - generic:
+        - generic [ref=f5e327]:
+          - button "Zoom in" [ref=f5e328] [cursor=pointer]: +
+          - button "Zoom out" [ref=f5e329] [cursor=pointer]: −
+        - generic [ref=f5e330]:
+          - link "Leaflet" [ref=f5e331] [cursor=pointer]:
+            - /url: https://leafletjs.com
+          - text: "| ©"
+          - link "OpenStreetMap" [ref=f5e336] [cursor=pointer]:
+            - /url: https://www.openstreetmap.org/copyright
+  - generic [ref=f5e338]:
+    - generic [ref=f5e339]:
+      - generic [ref=f5e340]: Actualités
+      - heading "La vie de l'arrondissement" [level=2] [ref=f5e909]
+    - generic [ref=f5e342]:
+      - article [ref=f5e910]:
+        - generic [ref=f5e911]: travaux
+        - heading "Réaménagement du boulevard Ziraoui" [level=3] [ref=f5e912]
+        - paragraph [ref=f5e913]: Les travaux de voirie et d'éclairage public se poursuivent. Circulation adaptée aux heures de sortie scolaire.
+        - paragraph [ref=f5e914]: 18 août 2026
+      - article [ref=f5e915]:
+        - generic [ref=f5e916]: vie locale
+        - heading "Nouvelle aire de jeux au parc de la Ligue Arabe" [level=3] [ref=f5e917]
+        - paragraph [ref=f5e918]: Un espace dédié aux enfants de 3 à 10 ans a été aménagé dans l'allée nord du parc.
+        - paragraph [ref=f5e919]: 12 août 2026
+      - article [ref=f5e920]:
+        - generic [ref=f5e921]: démarches
+        - 'heading "Légalisation : nouveaux horaires d''été" [level=3] [ref=f5e922]'
+        - paragraph [ref=f5e923]: Les annexes administratives accueillent le public de 9h00 à 16h00 sans interruption.
+        - paragraph [ref=f5e924]: 5 août 2026
+  - contentinfo [ref=f5e358]:
+    - generic [ref=f5e359]:
+      - generic [ref=f5e360]:
+        - generic [ref=f5e361]:
+          - paragraph [ref=f5e362]: Sidi Belyout
+          - paragraph [ref=f5e363]: Votre arrondissement. Vos services. Votre proximité.
+        - paragraph [ref=f5e365]: Démonstration — les données affichées proviennent de sources publiques et doivent être validées par l'arrondissement avant toute mise en ligne. Les numéros d'urgence sont à vérifier.
+      - generic [ref=f5e366]:
+        - generic [ref=f5e367]: Maquette de présentation — non contractuelle
+        - generic [ref=f5e368]: "Carte : OpenStreetMap"

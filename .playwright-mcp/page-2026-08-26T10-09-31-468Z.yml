@@ -1,0 +1,196 @@
+- generic [ref=f2e1]:
+  - generic [ref=f2e3]:
+    - generic [ref=f2e4]: الطوارئ
+    - link "النجدة 19" [ref=f2e364] [cursor=pointer]:
+      - /url: tel:19
+      - generic [ref=f2e365]: النجدة
+      - generic [ref=f2e366]: "19"
+    - link "الوقاية المدنية 15" [ref=f2e367] [cursor=pointer]:
+      - /url: tel:15
+      - generic [ref=f2e368]: الوقاية المدنية
+      - generic [ref=f2e369]: "15"
+    - link "الدرك الملكي 177" [ref=f2e370] [cursor=pointer]:
+      - /url: tel:177
+      - generic [ref=f2e371]: الدرك الملكي
+      - generic [ref=f2e372]: "177"
+  - banner [ref=f2e14]:
+    - generic [ref=f2e15]:
+      - link "سيدي بليوط بوابة القرب" [ref=f2e373] [cursor=pointer]:
+        - /url: "#top"
+        - generic [ref=f2e20]:
+          - generic [ref=f2e21]: سيدي بليوط
+          - generic [ref=f2e22]: بوابة القرب
+      - navigation "Navigation principale" [ref=f2e374]:
+        - link "ملحقتي" [ref=f2e375] [cursor=pointer]:
+          - /url: "#annexes"
+        - link "الأبواب" [ref=f2e376] [cursor=pointer]:
+          - /url: "#rubriques"
+        - link "الخريطة" [ref=f2e377] [cursor=pointer]:
+          - /url: "#carte"
+        - link "الأخبار" [ref=f2e378] [cursor=pointer]:
+          - /url: "#actus"
+      - generic [ref=f2e23]:
+        - button "Changer de langue" [active] [ref=f2e24] [cursor=pointer]:
+          - generic [ref=f2e25]: Français
+        - button "الوضع الليلي" [ref=f2e379] [cursor=pointer]
+  - generic [ref=f2e32]:
+    - generic [ref=f2e33]: مقاطعة سيدي بليوط
+    - heading "مقاطعتكم، في متناول يدكم." [level=1] [ref=f2e380]: مقاطعتكم،في متناول يدكم.
+    - paragraph [ref=f2e35]: اعثروا على خدمة أو إجراء أو مرفق بالقرب منكم. اتصلوا، أو انطلقوا في الاتجاه.
+    - generic [ref=f2e36]:
+      - paragraph [ref=f2e37]: "أنا في:"
+      - group "Choisir mon annexe" [ref=f2e38]:
+        - button "01 بوسمارة" [pressed] [ref=f2e381] [cursor=pointer]:
+          - generic [ref=f2e382]: "01"
+          - generic [ref=f2e383]: بوسمارة
+        - button "02 لالة ياقوت" [ref=f2e384] [cursor=pointer]:
+          - generic [ref=f2e385]: "02"
+          - generic [ref=f2e386]: لالة ياقوت
+        - button "03 بن جدية" [ref=f2e387] [cursor=pointer]:
+          - generic [ref=f2e388]: "03"
+          - generic [ref=f2e389]: بن جدية
+        - button "04 موسى بن نصير" [ref=f2e390] [cursor=pointer]:
+          - generic [ref=f2e391]: "04"
+          - generic [ref=f2e392]: موسى بن نصير
+        - button "05 مولاي يوسف" [ref=f2e393] [cursor=pointer]:
+          - generic [ref=f2e394]: "05"
+          - generic [ref=f2e395]: مولاي يوسف
+        - button "06 السور الجديد" [ref=f2e396] [cursor=pointer]:
+          - generic [ref=f2e397]: "06"
+          - generic [ref=f2e398]: السور الجديد
+    - paragraph [ref=f2e57]:
+      - generic [ref=f2e61]: مواقع الملحقات مؤقتة — في انتظار مصادقة المقاطعة.
+  - generic [ref=f2e63]:
+    - generic [ref=f2e64]:
+      - generic [ref=f2e65]: ملحقتي
+      - heading "الخدمات من حولكم" [level=2] [ref=f2e399]
+      - paragraph [ref=f2e67]: "اختاروا ملحقتكم أعلاه: تتكيف اللائحة والخريطة على الفور."
+    - generic [ref=f2e68]:
+      - generic [ref=f2e69]:
+        - generic [ref=f2e70]: "1"
+        - generic [ref=f2e71]:
+          - heading "بوسمارة" [level=3] [ref=f2e400]
+          - paragraph [ref=f2e73]: قطاع مركزي، على مقربة مباشرة من وسط المدينة التاريخي والمحاور الكبرى.
+        - generic [ref=f2e74]: 2 خدمات
+      - generic [ref=f2e75]:
+        - generic [ref=f2e76]:
+          - button "مقر الوقاية المدنية إسعاف · وسط المدينة، الدار البيضاء" [ref=f2e401] [cursor=pointer]
+          - button "موقف برج الياسمين مواقف · 27 زنقة أولاد زيان، الدار البيضاء" [ref=f2e409] [cursor=pointer]
+        - generic [ref=f2e93]:
+          - generic:
+            - generic:
+              - button [ref=f2e417] [cursor=pointer]
+              - button [ref=f2e422] [cursor=pointer]
+              - button [ref=f2e427] [cursor=pointer]
+  - generic [ref=f2e110]:
+    - generic [ref=f2e111]:
+      - generic [ref=f2e112]: هندسة البوابة
+      - heading "كل سيدي بليوط في مكان واحد" [level=2] [ref=f2e432]
+      - paragraph [ref=f2e114]: تسعة أبواب مصممة كمنظومة متكاملة، لا كصفحات منفصلة.
+    - generic [ref=f2e115]:
+      - button "ملحقتي الملحقات الست وخدمات القرب بها." [ref=f2e433] [cursor=pointer]:
+        - generic [ref=f2e437]: ملحقتي
+        - generic [ref=f2e438]: الملحقات الست وخدمات القرب بها.
+      - button "خدمات القرب الشرطة، الإطفاء، الصحة، الإدارات." [ref=f2e439] [cursor=pointer]:
+        - generic [ref=f2e444]: خدمات القرب
+        - generic [ref=f2e445]: الشرطة، الإطفاء، الصحة، الإدارات.
+      - button "إجراءاتي معلومات عملية حول الإجراءات الإدارية." [ref=f2e446] [cursor=pointer]:
+        - generic [ref=f2e451]: إجراءاتي
+        - generic [ref=f2e452]: معلومات عملية حول الإجراءات الإدارية.
+      - button "الأسرة والأطفال أنشطة، حدائق، فضاءات لعب، مدارس." [ref=f2e453] [cursor=pointer]:
+        - generic [ref=f2e459]: الأسرة والأطفال
+        - generic [ref=f2e460]: أنشطة، حدائق، فضاءات لعب، مدارس.
+      - button "الثقافة والرياضة مراكز ثقافية، منشآت رياضية." [ref=f2e461] [cursor=pointer]:
+        - generic [ref=f2e465]: الثقافة والرياضة
+        - generic [ref=f2e466]: مراكز ثقافية، منشآت رياضية.
+      - button "الأخبار معلومات، أشغال، حملات." [ref=f2e467] [cursor=pointer]:
+        - generic [ref=f2e472]: الأخبار
+        - generic [ref=f2e473]: معلومات، أشغال، حملات.
+      - button "الأجندة فعاليات ثقافية، رياضية، عائلية." [ref=f2e474] [cursor=pointer]:
+        - generic [ref=f2e479]: الأجندة
+        - generic [ref=f2e480]: فعاليات ثقافية، رياضية، عائلية.
+      - button "أرقام مفيدة أرقام أساسية ومصالح الطوارئ." [ref=f2e481] [cursor=pointer]:
+        - generic [ref=f2e485]: أرقام مفيدة
+        - generic [ref=f2e486]: أرقام أساسية ومصالح الطوارئ.
+      - button "الخريطة التفاعلية تحديد موقع جميع الخدمات والمرافق." [ref=f2e487] [cursor=pointer]:
+        - generic [ref=f2e492]: الخريطة التفاعلية
+        - generic [ref=f2e493]: تحديد موقع جميع الخدمات والمرافق.
+  - generic [ref=f2e178]:
+    - generic [ref=f2e179]:
+      - generic [ref=f2e180]: الخريطة التفاعلية
+      - heading "تحديد موقع خدمة" [level=2] [ref=f2e494]
+      - paragraph [ref=f2e182]: صفّوا حسب الفئة أو الملحقة. انقروا على نقطة لعرض بطاقتها الكاملة.
+    - searchbox "Rechercher" [ref=f2e187]
+    - group "Filtrer par catégorie" [ref=f2e188]:
+      - button "الكل" [pressed] [ref=f2e495] [cursor=pointer]
+      - button "إدارة" [ref=f2e497] [cursor=pointer]
+      - button "شرطة" [ref=f2e501] [cursor=pointer]
+      - button "إسعاف" [ref=f2e505] [cursor=pointer]
+      - button "صحة" [ref=f2e509] [cursor=pointer]
+      - button "ثقافة" [ref=f2e513] [cursor=pointer]
+      - button "رياضة" [ref=f2e517] [cursor=pointer]
+      - button "حدائق" [ref=f2e521] [cursor=pointer]
+      - button "تعليم" [ref=f2e525] [cursor=pointer]
+      - button "مواقف" [ref=f2e529] [cursor=pointer]
+      - button "نقل" [ref=f2e533] [cursor=pointer]
+    - generic [ref=f2e231]:
+      - generic:
+        - generic:
+          - button [ref=f2e537] [cursor=pointer]
+          - button [ref=f2e542] [cursor=pointer]
+          - button [ref=f2e547] [cursor=pointer]
+          - button [ref=f2e552] [cursor=pointer]
+          - button [ref=f2e557] [cursor=pointer]
+          - button [ref=f2e562] [cursor=pointer]
+          - button [ref=f2e567] [cursor=pointer]
+          - button [ref=f2e572] [cursor=pointer]
+          - button [ref=f2e577] [cursor=pointer]
+          - button [ref=f2e582] [cursor=pointer]
+          - button [ref=f2e587] [cursor=pointer]
+          - button [ref=f2e592] [cursor=pointer]
+          - button [ref=f2e597] [cursor=pointer]
+          - button [ref=f2e602] [cursor=pointer]
+          - button [ref=f2e607] [cursor=pointer]
+          - button [ref=f2e612] [cursor=pointer]
+          - button [ref=f2e617] [cursor=pointer]
+          - button [ref=f2e622] [cursor=pointer]
+      - generic:
+        - generic [ref=f2e322]:
+          - button "Zoom in" [ref=f2e323] [cursor=pointer]: +
+          - button "Zoom out" [ref=f2e324] [cursor=pointer]: −
+        - generic [ref=f2e325]:
+          - link "Leaflet" [ref=f2e326] [cursor=pointer]:
+            - /url: https://leafletjs.com
+          - text: "| ©"
+          - link "OpenStreetMap" [ref=f2e331] [cursor=pointer]:
+            - /url: https://www.openstreetmap.org/copyright
+  - generic [ref=f2e333]:
+    - generic [ref=f2e334]:
+      - generic [ref=f2e335]: الأخبار
+      - heading "حياة المقاطعة" [level=2] [ref=f2e627]
+    - generic [ref=f2e337]:
+      - article [ref=f2e628]:
+        - generic [ref=f2e629]: travaux
+        - heading "إعادة تهيئة شارع الزرقطوني" [level=3] [ref=f2e630]
+        - paragraph [ref=f2e631]: تتواصل أشغال الطرق والإنارة العمومية. حركة السير معدلة خلال أوقات الخروج المدرسي.
+        - paragraph [ref=f2e632]: 18 août 2026
+      - article [ref=f2e633]:
+        - generic [ref=f2e634]: vie locale
+        - heading "فضاء لعب جديد بمنتزه جامعة الدول العربية" [level=3] [ref=f2e635]
+        - paragraph [ref=f2e636]: تم تهيئة فضاء مخصص للأطفال من 3 إلى 10 سنوات بالممر الشمالي للمنتزه.
+        - paragraph [ref=f2e637]: 12 août 2026
+      - article [ref=f2e638]:
+        - generic [ref=f2e639]: démarches
+        - 'heading "تصحيح الإمضاء: توقيت صيفي جديد" [level=3] [ref=f2e640]'
+        - paragraph [ref=f2e641]: تستقبل الملحقات الإدارية العموم من 9:00 إلى 16:00 دون انقطاع.
+        - paragraph [ref=f2e642]: 5 août 2026
+  - contentinfo [ref=f2e353]:
+    - generic [ref=f2e354]:
+      - generic [ref=f2e355]:
+        - generic [ref=f2e356]:
+          - paragraph [ref=f2e357]: سيدي بليوط
+          - paragraph [ref=f2e358]: مقاطعتكم. خدماتكم. قربكم.
+        - paragraph [ref=f2e360]: نموذج تجريبي — المعطيات المعروضة مستقاة من مصادر عمومية ويجب أن تصادق عليها المقاطعة قبل النشر. أرقام الطوارئ تحتاج إلى تأكيد.
+      - generic [ref=f2e361]:
+        - generic [ref=f2e362]: نموذج للعرض — غير تعاقدي
+        - generic [ref=f2e363]: "الخريطة: OpenStreetMap"

@@ -1,0 +1,217 @@
+- generic [active] [ref=f8e1]:
+  - generic [ref=f8e3]:
+    - generic [ref=f8e4]: Urgences
+    - link "Police secours 19" [ref=f8e5] [cursor=pointer]:
+      - /url: tel:19
+      - generic [ref=f8e6]: Police secours
+      - generic [ref=f8e7]: "19"
+    - link "Protection civile 15" [ref=f8e8] [cursor=pointer]:
+      - /url: tel:15
+      - generic [ref=f8e9]: Protection civile
+      - generic [ref=f8e10]: "15"
+    - link "Gendarmerie royale 177" [ref=f8e11] [cursor=pointer]:
+      - /url: tel:177
+      - generic [ref=f8e12]: Gendarmerie royale
+      - generic [ref=f8e13]: "177"
+  - banner [ref=f8e14]:
+    - generic [ref=f8e15]:
+      - link "Sidi Belyout Portail de proximité" [ref=f8e16] [cursor=pointer]:
+        - /url: "#top"
+        - generic [ref=f8e18]:
+          - generic [ref=f8e19]: Sidi Belyout
+          - generic [ref=f8e20]: Portail de proximité
+      - generic [ref=f8e21]:
+        - button "Changer de langue" [ref=f8e22] [cursor=pointer]:
+          - generic [ref=f8e23]: العربية
+        - button "Mode sombre" [ref=f8e24] [cursor=pointer]
+  - generic [ref=f8e31]:
+    - generic [ref=f8e32]: Arrondissement de Sidi Belyout
+    - heading "Votre arrondissement, à portée de main." [level=1] [ref=f8e33]: Votre arrondissement,à portée de main.
+    - paragraph [ref=f8e34]: Trouvez un service, une démarche ou un équipement près de chez vous. Appelez, ou lancez l'itinéraire.
+    - generic [ref=f8e35]:
+      - paragraph [ref=f8e36]: "Je suis à :"
+      - group "Choisir mon annexe" [ref=f8e37]:
+        - button "01 Bousmara" [pressed] [ref=f8e38] [cursor=pointer]:
+          - generic [ref=f8e39]: "01"
+          - generic [ref=f8e40]: Bousmara
+        - button "02 Lalla Yacout" [ref=f8e41] [cursor=pointer]:
+          - generic [ref=f8e42]: "02"
+          - generic [ref=f8e43]: Lalla Yacout
+        - button "03 Ben Jdia" [ref=f8e44] [cursor=pointer]:
+          - generic [ref=f8e45]: "03"
+          - generic [ref=f8e46]: Ben Jdia
+        - button "04 Moussa Bnou Noussair" [ref=f8e47] [cursor=pointer]:
+          - generic [ref=f8e48]: "04"
+          - generic [ref=f8e49]: Moussa Bnou Noussair
+        - button "05 Moulay Youssef" [ref=f8e50] [cursor=pointer]:
+          - generic [ref=f8e51]: "05"
+          - generic [ref=f8e52]: Moulay Youssef
+        - button "06 Sour Jdid" [ref=f8e53] [cursor=pointer]:
+          - generic [ref=f8e54]: "06"
+          - generic [ref=f8e55]: Sour Jdid
+    - paragraph [ref=f8e56]:
+      - generic [ref=f8e59]: Positions des annexes provisoires — à valider par l'arrondissement.
+  - generic [ref=f8e61]:
+    - generic [ref=f8e62]:
+      - generic [ref=f8e63]: Mon quartier
+      - heading "Les services autour de vous" [level=2] [ref=f8e64]
+      - paragraph [ref=f8e65]: "Choisissez votre quartier ci-dessus : la liste et la carte s'adaptent immédiatement."
+    - generic [ref=f8e66]:
+      - generic [ref=f8e67]:
+        - generic [ref=f8e68]: "1"
+        - generic [ref=f8e69]:
+          - heading "Bousmara" [level=3] [ref=f8e70]
+          - paragraph [ref=f8e71]: Secteur central, à proximité immédiate du centre-ville historique et des grands axes.
+        - generic [ref=f8e72]: 2 services
+      - generic [ref=f8e73]:
+        - generic [ref=f8e74]:
+          - button "Siège de la Protection Civile Secours · Centre-ville, Casablanca" [ref=f8e75] [cursor=pointer]
+          - button "Parking Borj Al Yassamin Parkings · 27 rue Ouled Ziane, Casablanca" [ref=f8e84] [cursor=pointer]
+        - generic [ref=f8e95]:
+          - generic:
+            - generic:
+              - button [ref=f8e96] [cursor=pointer]
+              - button [ref=f8e101] [cursor=pointer]
+              - button [ref=f8e107] [cursor=pointer]
+  - generic [ref=f8e116]:
+    - generic [ref=f8e117]:
+      - generic [ref=f8e118]: Carte interactive
+      - heading "Localiser un service" [level=2] [ref=f8e119]
+      - paragraph [ref=f8e120]: Filtrez par catégorie ou par quartier. Cliquez sur un point pour voir sa fiche complète.
+    - searchbox "Rechercher" [ref=f8e125]
+    - group "Filtrer par catégorie" [ref=f8e126]:
+      - button "Toutes" [pressed] [ref=f8e127] [cursor=pointer]
+      - button "Administration" [ref=f8e129] [cursor=pointer]
+      - button "Police" [ref=f8e139] [cursor=pointer]
+      - button "Secours" [ref=f8e143] [cursor=pointer]
+      - button "Santé" [ref=f8e148] [cursor=pointer]
+      - button "Culture" [ref=f8e152] [cursor=pointer]
+      - button "Sport" [ref=f8e160] [cursor=pointer]
+      - button "Jardins" [ref=f8e168] [cursor=pointer]
+      - button "Éducation" [ref=f8e173] [cursor=pointer]
+      - button "Parkings" [ref=f8e178] [cursor=pointer]
+      - button "Transport" [ref=f8e185] [cursor=pointer]
+    - generic [ref=f8e191]:
+      - generic:
+        - generic:
+          - button [ref=f8e192] [cursor=pointer]
+          - button [ref=f8e197] [cursor=pointer]
+          - button [ref=f8e202] [cursor=pointer]
+          - button [ref=f8e207] [cursor=pointer]
+          - button [ref=f8e212] [cursor=pointer]
+          - button [ref=f8e217] [cursor=pointer]
+          - button [ref=f8e222] [cursor=pointer]
+          - button [ref=f8e233] [cursor=pointer]
+          - button [ref=f8e244] [cursor=pointer]
+          - button [ref=f8e249] [cursor=pointer]
+          - button [ref=f8e255] [cursor=pointer]
+          - button [ref=f8e260] [cursor=pointer]
+          - button [ref=f8e265] [cursor=pointer]
+          - button [ref=f8e274] [cursor=pointer]
+          - button [ref=f8e283] [cursor=pointer]
+          - button [ref=f8e289] [cursor=pointer]
+          - button [ref=f8e295] [cursor=pointer]
+          - button [ref=f8e303] [cursor=pointer]
+      - generic:
+        - generic [ref=f8e310]:
+          - button "Zoom in" [ref=f8e311] [cursor=pointer]: +
+          - button "Zoom out" [ref=f8e312] [cursor=pointer]: −
+        - generic [ref=f8e313]:
+          - link "Leaflet" [ref=f8e314] [cursor=pointer]:
+            - /url: https://leafletjs.com
+          - text: "| ©"
+          - link "OpenStreetMap" [ref=f8e319] [cursor=pointer]:
+            - /url: https://www.openstreetmap.org/copyright
+  - generic [ref=f8e321]:
+    - generic [ref=f8e322]:
+      - generic [ref=f8e323]: Actualités
+      - heading "La vie de l'arrondissement" [level=2] [ref=f8e324]
+    - generic [ref=f8e325]:
+      - article [ref=f8e326]:
+        - generic [ref=f8e328]:
+          - generic [ref=f8e329]: Culture
+          - heading "Rentrée culturelle au Complexe Culturel Sidi Belyout" [level=3] [ref=f8e330]
+          - paragraph [ref=f8e331]: Ateliers, expositions et spectacles reprennent dès septembre. Programme complet disponible à l'accueil du complexe et par téléphone.
+          - paragraph [ref=f8e332]: Publié le 20 août 2026
+      - generic [ref=f8e333]:
+        - article [ref=f8e334]:
+          - generic [ref=f8e336]:
+            - generic [ref=f8e337]: Travaux
+            - heading "Réaménagement du boulevard Ziraoui" [level=3] [ref=f8e338]
+            - paragraph [ref=f8e339]: Les travaux de voirie et d'éclairage public se poursuivent. Circulation adaptée aux heures de sortie scolaire.
+            - paragraph [ref=f8e340]: Publié le 18 août 2026
+        - article [ref=f8e341]:
+          - generic [ref=f8e343]:
+            - generic [ref=f8e344]: Sport
+            - heading "Ouverture des inscriptions au Complexe Sportif Larbi Ben Mbarek" [level=3] [ref=f8e345]
+            - paragraph [ref=f8e346]: "La nouvelle saison démarre en septembre : football à 7, tennis de table et arts martiaux. Inscriptions sur place, du lundi au samedi."
+            - paragraph [ref=f8e347]: Publié le 14 août 2026
+        - article [ref=f8e348]:
+          - generic [ref=f8e350]:
+            - generic [ref=f8e351]: Loisirs
+            - heading "Nouvelle aire de jeux au parc de la Ligue Arabe" [level=3] [ref=f8e352]
+            - paragraph [ref=f8e353]: Un espace dédié aux enfants de 3 à 10 ans a été aménagé dans l'allée nord du parc.
+            - paragraph [ref=f8e354]: Publié le 12 août 2026
+  - generic [ref=f8e356]:
+    - generic [ref=f8e357]:
+      - generic [ref=f8e358]: Agenda
+      - heading "Ce qui se passe près de chez vous" [level=2] [ref=f8e359]
+    - generic [ref=f8e360]:
+      - article [ref=f8e361]:
+        - generic [ref=f8e363]:
+          - paragraph [ref=f8e364]: 06 septembre
+          - generic [ref=f8e365]: Vie locale
+          - heading "Forum des associations de quartier" [level=3] [ref=f8e366]
+          - paragraph [ref=f8e367]: "Les associations de l'arrondissement présentent leurs activités : ateliers, bénévolat, aide aux familles. Entrée libre."
+          - paragraph [ref=f8e368]:
+            - generic [ref=f8e371]: Complexe Culturel Sidi Belyout
+      - generic [ref=f8e372]:
+        - article [ref=f8e373]:
+          - generic [ref=f8e375]:
+            - paragraph [ref=f8e376]: 12 septembre
+            - generic [ref=f8e377]: Sport
+            - heading "Tournoi de proximité inter-quartiers" [level=3] [ref=f8e378]
+            - paragraph [ref=f8e379]: Football à 7 et tennis de table, ouvert aux habitants de 12 à 18 ans. Inscription sur place le jour même.
+            - paragraph [ref=f8e380]:
+              - generic [ref=f8e383]: Complexe Sportif Larbi Ben Mbarek
+        - article [ref=f8e384]:
+          - generic [ref=f8e386]:
+            - paragraph [ref=f8e387]: 19 septembre
+            - generic [ref=f8e388]: Famille
+            - heading "Journée familiale au parc de la Ligue Arabe" [level=3] [ref=f8e389]
+            - paragraph [ref=f8e390]: Animations pour enfants, stands de sensibilisation à la propreté urbaine, goûter offert par l'arrondissement.
+            - paragraph [ref=f8e391]:
+              - generic [ref=f8e394]: Parc de la Ligue Arabe
+        - article [ref=f8e395]:
+          - generic [ref=f8e401]:
+            - paragraph [ref=f8e402]: 24 septembre
+            - generic [ref=f8e403]: Démarches
+            - 'heading "Séance d''information : démarches en ligne" [level=3] [ref=f8e404]'
+            - paragraph [ref=f8e405]: Présentation des démarches administratives disponibles et accompagnement pour les habitants peu familiers du numérique.
+            - paragraph [ref=f8e406]:
+              - generic [ref=f8e409]: Arrondissement de Sidi Belyout
+    - generic [ref=f8e410]: Voir tout l'agenda
+  - contentinfo [ref=f8e412]:
+    - generic [ref=f8e413]:
+      - generic [ref=f8e414]:
+        - generic [ref=f8e415]:
+          - paragraph [ref=f8e416]: Sidi Belyout
+          - paragraph [ref=f8e417]: Votre arrondissement. Vos services. Votre proximité.
+        - generic [ref=f8e418]:
+          - generic [ref=f8e419]:
+            - heading "Contact" [level=4] [ref=f8e420]
+            - paragraph [ref=f8e421]:
+              - link "05 22 22 33 67" [ref=f8e422] [cursor=pointer]:
+                - /url: tel:0522223367
+          - generic [ref=f8e423]:
+            - heading "Horaires" [level=4] [ref=f8e424]
+            - paragraph [ref=f8e425]: Lundi à vendredi, 9h00 – 16h00
+          - generic [ref=f8e426]:
+            - heading "Adresse" [level=4] [ref=f8e427]
+            - paragraph [ref=f8e428]: 150 boulevard d'Anfa, Casablanca
+        - paragraph [ref=f8e430]: Démonstration — les données affichées proviennent de sources publiques et doivent être validées par l'arrondissement avant toute mise en ligne. Les numéros d'urgence sont à vérifier.
+      - generic [ref=f8e431]:
+        - generic [ref=f8e432]: Maquette de présentation — non contractuelle
+        - generic [ref=f8e433]: Mentions légales
+        - generic [ref=f8e434]: Politique de confidentialité
+        - generic [ref=f8e435]: "Carte : OpenStreetMap"
