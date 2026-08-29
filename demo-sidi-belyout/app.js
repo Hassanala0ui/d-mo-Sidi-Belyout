@@ -1,5 +1,5 @@
 /* ============================================================
-   app.js — Portail Sidi Belyout (démo)
+   app.js - Portail Sidi Belyout (démo)
    ============================================================ */
 
 /* ── 1. Traductions ─────────────────────────────────────── */
@@ -12,7 +12,7 @@ const T = {
     eyebrow:"Arrondissement de Sidi Belyout",
     heroTitle:"Votre arrondissement,<br>à portée de main.",
     heroLead:"Trouvez un service, une démarche ou un équipement près de chez vous. Appelez, ou lancez l'itinéraire.",
-    heroNote:"Positions des annexes provisoires — à valider par l'arrondissement.",
+    heroNote:"Positions des annexes provisoires - à valider par l'arrondissement.",
     ebAnnexe:"Mon quartier", annexeH:"Les services autour de vous",
     annexeP:"Choisissez votre quartier ci-dessus : la liste et la carte s'adaptent immédiatement.",
     ebCarte:"Carte interactive", carteH:"Localiser un service",
@@ -21,10 +21,10 @@ const T = {
     actusAll:"Voir toutes les actualités",
     ebAgenda:"Agenda", agendaH:"Ce qui se passe près de chez vous", agendaAll:"Voir tout l'agenda",
     ebProjets:"Projets", projetsH:"Visualiser un aménagement avant sa réalisation",
-    projetBadge:"Exemple de rendu — projet fictif, à titre de démonstration",
+    projetBadge:"Exemple de rendu - projet fictif, à titre de démonstration",
     footTag:"Votre arrondissement. Vos services. Votre proximité.",
-    footNote:"Démonstration — les données affichées proviennent de sources publiques et doivent être validées par l'arrondissement avant toute mise en ligne. Les numéros d'urgence sont à vérifier.",
-    footLegal:"Maquette de présentation — non contractuelle",
+    footNote:"Démonstration - les données affichées proviennent de sources publiques et doivent être validées par l'arrondissement avant toute mise en ligne. Les numéros d'urgence sont à vérifier.",
+    footLegal:"Maquette de présentation - non contractuelle",
     footTech:"Carte : OpenStreetMap",
     footContactT:"Contact", footHoursT:"Horaires", footAddrT:"Adresse",
     footMentions:"Mentions légales", footConfid:"Politique de confidentialité",
@@ -48,7 +48,7 @@ const T = {
     eyebrow:"مقاطعة سيدي بليوط",
     heroTitle:"مقاطعتكم،<br>في متناول يدكم.",
     heroLead:"اعثروا على خدمة أو إجراء أو مرفق بالقرب منكم. اتصلوا، أو انطلقوا في الاتجاه.",
-    heroNote:"مواقع الملحقات مؤقتة — في انتظار مصادقة المقاطعة.",
+    heroNote:"مواقع الملحقات مؤقتة - في انتظار مصادقة المقاطعة.",
     ebAnnexe:"حيّي", annexeH:"الخدمات من حولكم",
     annexeP:"اختاروا حيّكم أعلاه: تتكيف اللائحة والخريطة على الفور.",
     ebCarte:"الخريطة التفاعلية", carteH:"تحديد موقع خدمة",
@@ -57,10 +57,10 @@ const T = {
     actusAll:"عرض جميع الأخبار",
     ebAgenda:"الأجندة", agendaH:"ما يقع بالقرب منكم", agendaAll:"عرض كامل الأجندة",
     ebProjets:"المشاريع", projetsH:"تصوّر مشروع قبل إنجازه",
-    projetBadge:"نموذج توضيحي — مشروع افتراضي لأغراض العرض فقط",
+    projetBadge:"نموذج توضيحي - مشروع افتراضي لأغراض العرض فقط",
     footTag:"مقاطعتكم. خدماتكم. قربكم.",
-    footNote:"نموذج تجريبي — المعطيات المعروضة مستقاة من مصادر عمومية ويجب أن تصادق عليها المقاطعة قبل النشر. أرقام الطوارئ تحتاج إلى تأكيد.",
-    footLegal:"نموذج للعرض — غير تعاقدي",
+    footNote:"نموذج تجريبي - المعطيات المعروضة مستقاة من مصادر عمومية ويجب أن تصادق عليها المقاطعة قبل النشر. أرقام الطوارئ تحتاج إلى تأكيد.",
+    footLegal:"نموذج للعرض - غير تعاقدي",
     footTech:"الخريطة: OpenStreetMap",
     footContactT:"اتصال", footHoursT:"التوقيت", footAddrT:"العنوان",
     footMentions:"الإشعار القانوني", footConfid:"سياسة الخصوصية",
@@ -89,7 +89,7 @@ const $  = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const t  = k => T[L_][k];
 
-/* ── 3. Icônes — pleines, blanches, dans un aplat de couleur ── */
+/* ── 3. Icônes - pleines, blanches, dans un aplat de couleur ── */
 const ICONS = {
   building:'<path d="M12 2 4 7h16Z"/><rect x="4" y="7" width="16" height="2"/><rect x="5" y="11" width="2" height="8"/><rect x="9" y="11" width="2" height="8"/><rect x="13" y="11" width="2" height="8"/><rect x="17" y="11" width="2" height="8"/><rect x="3" y="19" width="18" height="2"/>',
   shield:'<path d="M12 2 20 5v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V5Z"/>',
@@ -206,7 +206,7 @@ function renderQCards(){
   });
 }
 
-/* Regroupements réellement disponibles pour cette annexe — jamais de
+/* Regroupements réellement disponibles pour cette annexe - jamais de
    bouton vers un groupe sans service réel derrière. */
 function annexeQuickGroups(aId){
   const present = new Set(servicesOf(aId).map(s => s.cat));
@@ -312,7 +312,7 @@ function renderMega(){
 }
 
 /* Panneau plein écran sous 900px : mêmes données que le méga-menu,
-   en accordéons natifs <details> — accessibles au clavier sans JS de focus-trap. */
+   en accordéons natifs <details> - accessibles au clavier sans JS de focus-trap. */
 function renderMobileNav(){
   const rubLink = r => `<a href="#${MEGA_TARGET[r.id]}">${r[L_].t}</a>`;
   const annexeLink = a =>
@@ -388,7 +388,7 @@ function renderFooter(){
 }
 
 /* Carte commune à l'Agenda (à venir, date en badge) et aux Actualités
-   (déjà publiées, date en pied de carte) — même structure, même gabarit. */
+   (déjà publiées, date en pied de carte) - même structure, même gabarit. */
 function renderEventGrid(sel, items, { icon, dated }){
   const box = $(sel);
   box.innerHTML = "";
@@ -464,7 +464,7 @@ function pinIcon(color, icon, big=false){
   });
 }
 
-/* Pastille de regroupement — carte interactive uniquement (#map).
+/* Pastille de regroupement - carte interactive uniquement (#map).
    Trois paliers de taille/teinte dans notre palette (pas celle de Culturama). */
 function clusterIcon(cluster){
   const count = cluster.getChildCount();
@@ -583,7 +583,7 @@ function openSheet(id){
     line("pin",   t("address"), s[L_].address) +
     line("clock", t("hours"),   s[L_].hours) +
     line("phone", t("phone"),   s.phone ? s.phone.replace(/(\d{2})(?=\d)/g,"$1 ").trim() : t("noPhone"), !!s.phone) +
-    line("home",  t("annexe"),  a ? a[L_].name : "—") +
+    line("home",  t("annexe"),  a ? a[L_].name : "-") +
     line("info",  t("about"),   s[L_].note);
 
   const call = $("#shCall");
@@ -716,7 +716,7 @@ const vid = $("#heroVid");
 vid.addEventListener("error", () => vid.style.display = "none", true);
 if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) vid.removeAttribute("autoplay");
 
-/* Même repli pour la vidéo de la section Projets — si le fichier est
+/* Même repli pour la vidéo de la section Projets - si le fichier est
    absent, le fond plein de couleur de .projet__media prend le relais
    et le badge « exemple de démonstration » reste affiché. */
 const projVid = $("#projetVid");

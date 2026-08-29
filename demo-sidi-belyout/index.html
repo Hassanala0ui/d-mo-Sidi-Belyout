@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sidi Belyout — Portail Numérique de Proximité</title>
+<title>Sidi Belyout - Portail Numérique de Proximité</title>
 <meta name="description" content="Portail de proximité de l'arrondissement de Sidi Belyout, Casablanca. Services, démarches, carte interactive, agenda.">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
@@ -56,7 +56,7 @@ html[lang="ar"]{
 }
 
 html[data-theme="dark"]{
-  /* Fond neutre marine — indépendant de --navy/--navy-deep (le vert reste
+  /* Fond neutre marine - indépendant de --navy/--navy-deep (le vert reste
      réservé à la nav, au pied de page et aux blocs d'accent pleins).
      Trois teintes de marine, de la plus profonde à la plus claire, pour
      que sections et cartes se détachent les unes des autres. */
@@ -85,7 +85,7 @@ body{
   transition:background .4s ease, color .4s ease;
 }
 
-/* Zellige en filigrane — une seule section (#annexes), concentré aux angles,
+/* Zellige en filigrane - une seule section (#annexes), concentré aux angles,
    s'estompe vers le centre, suit l'accent de l'annexe sélectionnée */
 
 h1,h2,h3{font-family:var(--font-display); font-weight:600; line-height:1.2; margin:0}
@@ -116,7 +116,7 @@ html[dir="rtl"] .dir-icon{transform:scaleX(-1)}
 }
 
 /* ═══════════════════════════════════════════════════════════
-   3. BANDEAU URGENCES — accessible partout, sans scroll
+   3. BANDEAU URGENCES - accessible partout, sans scroll
    ═══════════════════════════════════════════════════════════ */
 .urgences{
   position:relative; z-index:60;
@@ -371,7 +371,7 @@ section{position:relative; z-index:1}
 .sec__head h2{font-size:clamp(1.6rem,3.4vw,2.3rem)}
 .sec__head p{margin-block-start:10px; color:var(--fg-soft)}
 
-/* Zellige — médaillons en filigrane, cantonnés aux quatre coins, jamais sous le contenu.
+/* Zellige - médaillons en filigrane, cantonnés aux quatre coins, jamais sous le contenu.
    #annexes (Mon quartier) et #carte partagent les mêmes deux motifs, dupliqués
    en haut et en bas de chaque côté. */
 #annexes, #carte{position:relative; overflow:hidden}
@@ -425,7 +425,7 @@ html[data-theme="dark"] #actus::before{ background-color:var(--gold); opacity:.0
 #actus .sec__head{background:var(--bg-sunk)}
 
 /* ── Panneau annexe ─────────────────────────────────────── */
-/* ── Cartes de sélection — carte claire, photo encadrée, nom en dessous ── */
+/* ── Cartes de sélection - carte claire, photo encadrée, nom en dessous ── */
 .qcards{display:grid; grid-template-columns:repeat(6,1fr); gap:12px}
 @media(max-width:900px){.qcards{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:520px){.qcards{grid-template-columns:repeat(2,1fr)}}
@@ -449,7 +449,7 @@ html[data-theme="dark"] #actus::before{ background-color:var(--gold); opacity:.0
 }
 .qcard[aria-pressed="true"] .qcard__check{display:flex}
 
-/* ── Panneau de contenu — fond clair, uni (le zellige reste réservé
+/* ── Panneau de contenu - fond clair, uni (le zellige reste réservé
    aux bandeaux et aux coins de section, pas à cette carte) ── */
 .qpanel{
   margin-block-start:14px; padding:22px 24px;
@@ -523,7 +523,7 @@ html[data-theme="dark"] .qbtn__ico{color:var(--accent)}
 .mapreset:hover{color:var(--accent-ink); border-color:var(--accent)}
 html[data-theme="dark"] .mapreset:hover{color:var(--accent)}
 
-/* ── Ligne service — liste éditoriale, séparateurs fins plutôt
+/* ── Ligne service - liste éditoriale, séparateurs fins plutôt
    que des blocs de couleur (registre institutionnel, pas dashboard) ── */
 .row{
   inline-size:100%;
@@ -630,8 +630,10 @@ html[data-theme="dark"] .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) b
   border-radius:999px; background:var(--navy); color:#fff;
   font-size:12.5px; font-weight:600; text-decoration:none;
 }
+.leaflet-popup-content .pop__b,
+.leaflet-popup-content .pop__b:visited{color:#fff}
 
-/* ── Agenda & Actualités — même grille, même carte ─────────
+/* ── Agenda & Actualités - même grille, même carte ─────────
    #agenda-grid (à venir) et #news (publié récemment) partagent
    exactement la même structure : une carte vedette + une liste. */
 .agenda{display:grid; grid-template-columns:1.3fr 1fr; gap:14px; align-items:start}
@@ -720,7 +722,7 @@ html[lang="ar"] .ag__tag{letter-spacing:0; text-transform:none; font-size:12px}
 }
 .actus__btn:hover{background:var(--navy); color:#fff}
 
-/* ── Section Projets — timelapse + panneau plein ─────────── */
+/* ── Section Projets - timelapse + panneau plein ─────────── */
 .projet{
   display:grid; grid-template-columns:1.3fr 1fr;
   border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow-lg);
@@ -979,7 +981,7 @@ html[lang="ar"] .foot__newsSoon{letter-spacing:0}
 
     <p class="hero__note">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm1-13h-2v2h2Zm0 4h-2v6h2Z"/></svg>
-      <span data-t="heroNote">Positions des annexes provisoires — à valider par l'arrondissement.</span>
+      <span data-t="heroNote">Positions des annexes provisoires - à valider par l'arrondissement.</span>
     </p>
   </div>
 </section>
@@ -999,8 +1001,8 @@ html[lang="ar"] .foot__newsSoon{letter-spacing:0}
       <div class="qpanel__top">
         <span class="qpanel__badge" id="anBadge">1</span>
         <div class="qpanel__txt">
-          <h3 class="qpanel__ttl" id="anName">—</h3>
-          <p class="qpanel__desc" id="anDesc">—</p>
+          <h3 class="qpanel__ttl" id="anName">-</h3>
+          <p class="qpanel__desc" id="anDesc">-</p>
         </div>
         <span class="qpanel__count" id="anCount"></span>
       </div>
@@ -1083,12 +1085,12 @@ html[lang="ar"] .foot__newsSoon{letter-spacing:0}
         </video>
         <span class="projet__badge">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0ZM13 9h-2v5h2Zm0 7h-2v2h2Z"/></svg>
-          <span data-t="projetBadge">Exemple de rendu — projet fictif, à titre de démonstration</span>
+          <span data-t="projetBadge">Exemple de rendu - projet fictif, à titre de démonstration</span>
         </span>
       </div>
       <div class="projet__panel">
-        <h3 class="projet__title" id="projTitle">—</h3>
-        <p class="projet__lead" id="projLead">—</p>
+        <h3 class="projet__title" id="projTitle">-</h3>
+        <p class="projet__lead" id="projLead">-</p>
         <div class="projet__points" id="projPoints"></div>
       </div>
     </div>
@@ -1105,7 +1107,7 @@ html[lang="ar"] .foot__newsSoon{letter-spacing:0}
       </div>
       <div class="foot__contact" id="footContact"></div>
       <div class="foot__side">
-        <p data-t="footNote">Démonstration — les données affichées proviennent de sources publiques et doivent être validées par l'arrondissement avant toute mise en ligne. Les numéros d'urgence sont à vérifier.</p>
+        <p data-t="footNote">Démonstration - les données affichées proviennent de sources publiques et doivent être validées par l'arrondissement avant toute mise en ligne. Les numéros d'urgence sont à vérifier.</p>
       </div>
     </div>
 
@@ -1136,7 +1138,7 @@ html[lang="ar"] .foot__newsSoon{letter-spacing:0}
     </div>
 
     <div class="foot__bar">
-      <span data-t="footLegal">Maquette de présentation — non contractuelle</span>
+      <span data-t="footLegal">Maquette de présentation - non contractuelle</span>
       <span data-t="footMentions">Mentions légales</span>
       <span data-t="footConfid">Politique de confidentialité</span>
       <span data-t="footTech">Carte : OpenStreetMap</span>

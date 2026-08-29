@@ -1,6 +1,6 @@
 /* ============================================================
-   data/seed.js — Données de démonstration
-   Portail Numérique de Proximité — Sidi Belyout
+   data/seed.js - Données de démonstration
+   Portail Numérique de Proximité - Sidi Belyout
    ------------------------------------------------------------
    Toute donnée affichée dans la démo provient de ce fichier.
    Aucune donnée n'est codée en dur dans un composant.
@@ -91,7 +91,7 @@ const CATEGORIES = [
   { id: "transport",      icon: "train",     fr: "Transport",        ar: "نقل" }
 ];
 
-/* Regroupements pour les 4 accès rapides de la section "Mon quartier" —
+/* Regroupements pour les 4 accès rapides de la section "Mon quartier" -
    un bouton n'apparaît que si l'annexe a au moins un service réel dedans. */
 const QUICK_GROUPS = [
   { id: "administratif", icon: "building", cats: ["administration", "police", "secours"], fr: "Services Administratifs", ar: "الخدمات الإدارية" },
@@ -111,13 +111,13 @@ const SERVICES = [
     fr: {
       name: "Arrondissement de Sidi Belyout",
       address: "150 boulevard d'Anfa, Casablanca",
-      hours: "Lundi à vendredi, 9h00 – 16h00",
+      hours: "Lundi à vendredi, 9h00 - 16h00",
       note: "Siège de l'arrondissement. Légalisation de documents, état civil, services administratifs."
     },
     ar: {
       name: "مقاطعة سيدي بليوط",
       address: "150 شارع أنفا، الدار البيضاء",
-      hours: "الاثنين إلى الجمعة، 9:00 – 16:00",
+      hours: "الاثنين إلى الجمعة، 9:00 - 16:00",
       note: "مقر المقاطعة. تصحيح الإمضاء، الحالة المدنية، الخدمات الإدارية."
     }
   },
@@ -211,13 +211,13 @@ const SERVICES = [
     fr: {
       name: "Centre de Santé Moulay Youssef",
       address: "Boulevard Moulay Youssef, Casablanca",
-      hours: "Lundi à vendredi, 8h30 – 16h00",
+      hours: "Lundi à vendredi, 8h30 - 16h00",
       note: "Consultations de médecine générale, vaccinations, suivi maternel et infantile."
     },
     ar: {
       name: "المركز الصحي مولاي يوسف",
       address: "شارع مولاي يوسف، الدار البيضاء",
-      hours: "الاثنين إلى الجمعة، 8:30 – 16:00",
+      hours: "الاثنين إلى الجمعة، 8:30 - 16:00",
       note: "استشارات الطب العام، التلقيح، تتبع صحة الأم والطفل."
     }
   },
@@ -231,13 +231,13 @@ const SERVICES = [
     fr: {
       name: "Complexe Culturel Sidi Belyout",
       address: "Rue Sidi Belyout, Casablanca",
-      hours: "Lundi à dimanche, 9h00 – 18h00",
+      hours: "Lundi à dimanche, 9h00 - 18h00",
       note: "Ateliers, expositions, spectacles et activités culturelles de l'arrondissement."
     },
     ar: {
       name: "المركب الثقافي سيدي بليوط",
       address: "زنقة سيدي بليوط، الدار البيضاء",
-      hours: "الاثنين إلى الأحد، 9:00 – 18:00",
+      hours: "الاثنين إلى الأحد، 9:00 - 18:00",
       note: "ورشات، معارض، عروض وأنشطة ثقافية بالمقاطعة."
     }
   },
@@ -251,13 +251,13 @@ const SERVICES = [
     fr: {
       name: "Complexe Sportif Larbi Ben Mbarek",
       address: "Rue Sidi Belyout, Casablanca",
-      hours: "Tous les jours, 8h00 – 23h00",
+      hours: "Tous les jours, 8h00 - 23h00",
       note: "Salles et terrains, clubs et disciplines variées, arts martiaux."
     },
     ar: {
       name: "المركب الرياضي العربي بن مبارك",
       address: "زنقة سيدي بليوط، الدار البيضاء",
-      hours: "كل الأيام، 8:00 – 23:00",
+      hours: "كل الأيام، 8:00 - 23:00",
       note: "قاعات وملاعب، أندية وتخصصات متنوعة، فنون قتالية."
     }
   },
@@ -271,13 +271,13 @@ const SERVICES = [
     fr: {
       name: "Parc de la Ligue Arabe",
       address: "Boulevard Moulay Youssef, Casablanca",
-      hours: "Tous les jours, 8h30 – 19h00",
+      hours: "Tous les jours, 8h30 - 19h00",
       note: "Le plus grand parc du centre-ville. Aire de jeux pour enfants, allées ombragées, fontaines."
     },
     ar: {
       name: "منتزه جامعة الدول العربية",
       address: "شارع مولاي يوسف، الدار البيضاء",
-      hours: "كل الأيام، 8:30 – 19:00",
+      hours: "كل الأيام، 8:30 - 19:00",
       note: "أكبر منتزه بوسط المدينة. فضاء لعب للأطفال، ممرات مظللة، نوافير."
     }
   },
@@ -417,13 +417,13 @@ const ACTUS = [
   }
 ];
 
-/* Section "Projets" — un seul exemple, explicitement fictif (voir badge
+/* Section "Projets" - un seul exemple, explicitement fictif (voir badge
    superposé au lecteur vidéo dans index.html). Sert à démontrer l'usage
    du timelapse pour présenter un aménagement avant sa réalisation. */
 const PROJET_EXEMPLE = {
   fr: {
     titre: "Donner vie à vos futurs aménagements",
-    texte: "Exemple de démonstration : avant même la fin des travaux, ce format permet de présenter aux habitants à quoi ressemblera un aménagement futur — un nouveau parc, une rue réaménagée, une place rénovée.",
+    texte: "Exemple de démonstration : avant même la fin des travaux, ce format permet de présenter aux habitants à quoi ressemblera un aménagement futur - un nouveau parc, une rue réaménagée, une place rénovée.",
     points: [
       { t: "Un aperçu avant travaux", d: "Montrer le résultat attendu dès la phase de conception, pas seulement une fois le chantier terminé." },
       { t: "Adhésion des habitants", d: "Un rendu concret facilite la compréhension du projet et son acceptation par les riverains." },
@@ -432,7 +432,7 @@ const PROJET_EXEMPLE = {
   },
   ar: {
     titre: "إحياء مشاريعكم المستقبلية",
-    texte: "مثال توضيحي: يتيح هذا الشكل، قبل انتهاء الأشغال، عرض الشكل الذي سيكون عليه مشروع مستقبلي على السكان — حديقة جديدة، شارع معاد تهيئته، أو ساحة مجددة.",
+    texte: "مثال توضيحي: يتيح هذا الشكل، قبل انتهاء الأشغال، عرض الشكل الذي سيكون عليه مشروع مستقبلي على السكان - حديقة جديدة، شارع معاد تهيئته، أو ساحة مجددة.",
     points: [
       { t: "لمحة قبل الأشغال", d: "إظهار النتيجة المرتقبة منذ مرحلة التصميم، وليس فقط بعد انتهاء الورش." },
       { t: "انخراط السكان", d: "تصور واقعي يسهل فهم المشروع وتقبّله من طرف الساكنة." },

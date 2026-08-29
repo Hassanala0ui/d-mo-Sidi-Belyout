@@ -403,3 +403,8 @@ des trois premiers points.
 **Copie :** noms des choses tels que l'habitant les reconnaît, jamais tels que
 le système les nomme. Un bouton dit ce qui se passe quand on l'active.
 « Appeler », pas « Contacter ». « Voir l'itinéraire », pas « Naviguer ».
+
+**Typographie — tiret cadratin interdit :** ne jamais utiliser le tiret
+cadratin (—) dans les textes du site, les titres, ni les commentaires de
+code. Utiliser un tiret simple (-) entouré d'espaces, ou reformuler
+la phrase (virgule, parenthèses, point).
