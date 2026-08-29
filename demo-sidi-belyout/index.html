@@ -395,8 +395,30 @@ section{position:relative; z-index:1}
 html[data-theme="dark"] #annexes::before, html[data-theme="dark"] #annexes::after,
 html[data-theme="dark"] #carte::before, html[data-theme="dark"] #carte::after{ opacity:.3 }
 @media(max-width:900px){
+  /* Le motif n'a plus de large gouttière hors .wrap pour respirer : on
+     élargit légèrement la marge de page de ces deux sections pour lui
+     laisser un mince liseré visible, jamais recouvert par les cartes.
+     Un seul médaillon répété verticalement (repeat-y) plutôt que les deux
+     occurrences haut/bas du bureau : sinon il disparaît sur tout le milieu
+     d'une section aussi longue. */
+  #annexes .wrap, #carte .wrap{ padding-inline:34px }
   #annexes::before, #annexes::after,
-  #carte::before, #carte::after{ display:none }
+  #carte::before, #carte::after{
+    inline-size:34px;
+    background-size:70px 100px;
+    background-repeat:repeat-y;
+    opacity:1;
+  }
+  #annexes::before, #carte::before{
+    inset-inline-start:0;
+    background-image:url("assets/motif-coin-left.png");
+    background-position:left top;
+  }
+  #annexes::after, #carte::after{
+    inset-inline-end:0;
+    background-image:url("assets/motif-coin-right.png");
+    background-position:right top;
+  }
 }
 #annexes .sec__head{background:var(--bg)}
 
