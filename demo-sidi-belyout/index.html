@@ -5,7 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sidi Belyout - Portail Numérique de Proximité</title>
 <meta name="description" content="Portail de proximité de l'arrondissement de Sidi Belyout, Casablanca. Services, démarches, carte interactive, agenda.">
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon-180.png">
+
+<script>
+/* Applique le thème et la langue mémorisés avant le premier rendu (évite le
+   clignotement). Repli sur la préférence système pour le thème, français pour
+   la langue. Toute erreur d'accès au stockage est sans conséquence. */
+(function(){
+  try{
+    var theme = localStorage.getItem("sb-theme");
+    if (theme !== "dark" && theme !== "light"){
+      theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    document.documentElement.dataset.theme = theme;
+    if (localStorage.getItem("sb-lang") === "ar"){
+      document.documentElement.lang = "ar";
+      document.documentElement.dir = "rtl";
+    }
+  }catch(e){}
+})();
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -160,21 +181,18 @@ html[dir="rtl"] .dir-icon{transform:scaleX(-1)}
 }
 .head__in{display:flex; align-items:center; gap:16px; min-height:66px}
 
-.brand{display:flex; align-items:center; gap:11px; text-decoration:none; margin-inline-end:auto; min-inline-size:0}
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none; margin-inline-end:auto; min-inline-size:0}
 .brand__mark{
   flex:0 0 auto;
-  border-radius:7px;
-  background:#fff;
   display:inline-flex; align-items:center;
-  padding:5px 9px;
 }
-.brand__mark img{block-size:24px; inline-size:auto; display:block}
+.brand__mark img{block-size:42px; inline-size:auto; display:block}
 .brand__txt{display:flex; flex-direction:column; line-height:1.15; min-inline-size:0}
 .brand__name{
   font-family:var(--font-display); font-size:17px; font-weight:700; letter-spacing:.01em; color:#fff;
   white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-inline-size:100%;
 }
-.brand__sub{font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:rgba(255,255,255,.62)}
+.brand__sub{font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:rgba(255,255,255,.78)}
 html[lang="ar"] .brand__sub{letter-spacing:0; text-transform:none}
 
 /* ── Navigation : déclencheurs simples + méga-menus ─────── */
@@ -220,8 +238,7 @@ html[lang="ar"] .brand__sub{letter-spacing:0; text-transform:none}
   .tog{padding-inline:10px}
   .head__in{gap:10px}
   .brand{gap:8px}
-  .brand__mark{padding:4px 7px}
-  .brand__mark img{block-size:20px}
+  .brand__mark img{block-size:34px}
   .brand__name{font-size:15.5px}
 }
 
@@ -242,7 +259,7 @@ html[lang="ar"] .brand__sub{letter-spacing:0; text-transform:none}
   display:inline-flex; align-items:center;
   min-block-size:42px;
   color:#fff; font-size:15px; font-weight:500; text-decoration:none;
-  opacity:.88; transition:opacity .15s;
+  opacity:.94; transition:opacity .15s;
 }
 .mega__link:hover, .mega__link:focus-visible{opacity:1; text-decoration:underline}
 .mega__dot{inline-size:8px; block-size:8px; border-radius:50%; background:var(--chip); margin-inline-end:10px; flex:0 0 auto}
@@ -255,7 +272,7 @@ html[lang="ar"] .brand__sub{letter-spacing:0; text-transform:none}
 }
 .mega__quickT{
   font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
-  color:rgba(255,255,255,.58); margin-block-end:2px;
+  color:rgba(255,255,255,.74); margin-block-end:2px;
 }
 html[lang="ar"] .mega__quickT{letter-spacing:0; text-transform:none; font-size:13px}
 .mega__qbtn{
@@ -310,7 +327,7 @@ html[lang="ar"] .mega__quickT{letter-spacing:0; text-transform:none; font-size:1
 .mobilenav__quick{padding-block-start:22px; display:flex; flex-direction:column; gap:9px}
 .mobilenav__quickT{
   font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
-  color:rgba(255,255,255,.58); margin-block-end:2px;
+  color:rgba(255,255,255,.74); margin-block-end:2px;
 }
 html[lang="ar"] .mobilenav__quickT{letter-spacing:0; text-transform:none; font-size:13px}
 
@@ -354,10 +371,6 @@ html[lang="ar"] .eyebrow{letter-spacing:0; text-transform:none; font-size:13px}
   font-size:clamp(1rem,2vw,1.16rem); color:rgba(255,255,255,.8);
 }
 
-.hero__note{
-  margin-block-start:20px; display:inline-flex; align-items:center; gap:8px;
-  font-size:12px; color:rgba(255,255,255,.62);
-}
 
 /* ═══════════════════════════════════════════════════════════
    6. SECTIONS
@@ -723,15 +736,23 @@ html[lang="ar"] .ag__tag{letter-spacing:0; text-transform:none; font-size:12px}
 }
 .ag__lieu svg{flex:0 0 auto}
 .ag__pub{font-size:12px; color:var(--fg-soft); margin-block-start:10px}
+.ag__src{font-size:11.5px; color:var(--fg-soft); margin-block-start:3px; opacity:.9}
+html[lang="ar"] .ag__src{font-size:12.5px}
 .ag__list{display:flex; flex-direction:column; gap:14px}
 .agenda__more{margin-block-start:24px; text-align:center}
 .agenda__btn{
   display:inline-flex; align-items:center; justify-content:center;
-  min-block-size:44px; padding-inline:20px;
-  border:1px solid var(--line); border-radius:999px;
-  font-size:13.5px; font-weight:600; color:var(--fg-soft);
-  opacity:.6;
+  min-block-size:44px; padding-inline:22px;
+  border:1.5px solid var(--navy); border-radius:999px;
+  font-size:13.5px; font-weight:600; color:var(--navy);
+  transition:background-color .18s, color .18s;
 }
+.agenda__btn:hover{background:var(--navy); color:#fff}
+
+/* Cartes au-delà des 4 mises en avant (Actualités, Agenda) : masquées
+   jusqu'au dépliage par « voir tout » */
+.ag--extra{display:none}
+.sec--show-all .ag--extra{display:flex}
 
 .actus__more{margin-block-start:24px; text-align:center}
 .actus__btn{
@@ -744,43 +765,28 @@ html[lang="ar"] .ag__tag{letter-spacing:0; text-transform:none; font-size:12px}
 }
 .actus__btn:hover{background:var(--navy); color:#fff}
 
-/* ── Section Projets - timelapse + panneau plein ─────────── */
-.projet{
-  display:grid; grid-template-columns:1.3fr 1fr;
-  border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow-lg);
+/* ── Section Projets - état "en préparation" ─────────────── */
+.projet__soon{
+  border:1px solid var(--line); border-radius:var(--r-lg);
+  background:var(--bg-raise); box-shadow:var(--shadow);
+  padding:48px 32px; text-align:center;
+  display:flex; flex-direction:column; align-items:center; gap:12px;
 }
-@media(max-width:880px){.projet{grid-template-columns:1fr}}
-
-.projet__media{position:relative; background:var(--navy); aspect-ratio:16/10}
-.projet__media video{
-  position:absolute; inset:0;
-  inline-size:100%; block-size:100%; object-fit:cover; display:block;
+.projet__soonIco{
+  inline-size:54px; block-size:54px; border-radius:50%;
+  display:grid; place-items:center;
+  background:color-mix(in srgb, var(--accent) 14%, var(--bg-raise));
+  color:var(--accent-ink);
+  transition:background-color .45s ease, color .45s ease;
 }
-.projet__badge{
-  position:absolute; inset-inline:0; inset-block-end:0; z-index:2;
-  display:flex; align-items:center; gap:8px;
-  padding:11px 16px;
-  background:rgba(4,26,43,.86); color:#fff;
-  font-size:12px; font-weight:600; line-height:1.4;
-  pointer-events:none;
+html[data-theme="dark"] .projet__soonIco{color:var(--accent)}
+.projet__soonBadge{
+  font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--accent-ink);
 }
-.projet__badge svg{flex:0 0 auto; color:var(--gold)}
-
-.projet__panel{
-  background-color:var(--navy);
-  background-image:url("assets/motif-footer.png");
-  background-repeat:repeat-x; background-position:center top; background-size:auto 320px;
-  color:#fff;
-  padding:32px 36px;
-  display:flex; flex-direction:column; justify-content:center; gap:13px;
-  min-block-size:0; overflow-y:auto;
-}
-.projet__title{font-size:clamp(1.2rem,2.4vw,1.55rem); color:#fff}
-.projet__lead{font-size:13.5px; line-height:1.65; color:rgba(255,255,255,.82)}
-.projet__points{display:flex; flex-direction:column; gap:11px; margin-block-start:2px}
-.projet__point{padding-inline-start:14px; border-inline-start:3px solid var(--gold)}
-.projet__point b{display:block; font-size:13.5px; font-weight:700; color:#fff}
-.projet__point span{font-size:12.5px; line-height:1.55; color:rgba(255,255,255,.75)}
+html[data-theme="dark"] .projet__soonBadge{color:var(--accent)}
+html[lang="ar"] .projet__soonBadge{letter-spacing:0; text-transform:none; font-size:13px}
+.projet__soonText{font-size:14px; color:var(--fg-soft); max-inline-size:44em; margin-inline:auto}
 
 /* ── Fiche service (panneau) ────────────────────────────── */
 .sheet{
@@ -871,7 +877,7 @@ html[lang="ar"] .info__k{letter-spacing:0; text-transform:none; font-size:12.5px
   background-color:var(--navy-deep);
   background-image:url("assets/motif-footer.png");
   background-repeat:repeat-x; background-position:center top; background-size:auto 320px;
-  color:rgba(255,255,255,.72); padding-block:44px 30px; position:relative; z-index:1;
+  color:rgba(255,255,255,.82); padding-block:44px 30px; position:relative; z-index:1;
 }
 .foot__grid{display:flex; flex-wrap:wrap; gap:30px; justify-content:space-between; align-items:flex-start}
 .foot__brand{font-family:var(--font-display); font-size:1.25rem; color:#fff}
@@ -879,7 +885,7 @@ html[lang="ar"] .info__k{letter-spacing:0; text-transform:none; font-size:12.5px
 .foot__contact{display:flex; gap:28px; flex-wrap:wrap}
 .foot__col h4{
   font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
-  color:rgba(255,255,255,.5); margin-block-end:7px;
+  color:rgba(255,255,255,.7); margin-block-end:7px;
 }
 html[lang="ar"] .foot__col h4{letter-spacing:0; text-transform:none; font-size:12.5px}
 .foot__col p{font-size:12.5px; line-height:1.8}
@@ -889,9 +895,11 @@ html[lang="ar"] .foot__col h4{letter-spacing:0; text-transform:none; font-size:1
 .foot__bar{
   margin-block-start:28px; padding-block-start:18px;
   border-block-start:1px solid rgba(255,255,255,.13);
-  font-size:11.5px; color:rgba(255,255,255,.5);
+  font-size:11.5px; color:rgba(255,255,255,.68);
   display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between;
 }
+.foot__bar a{color:inherit; text-decoration:none}
+.foot__bar a:hover{color:#fff; text-decoration:underline}
 
 .foot__extra{
   margin-block-start:28px; padding-block-start:24px;
@@ -945,9 +953,9 @@ html[lang="ar"] .foot__newsSoon{letter-spacing:0}
 <!-- ════════ EN-TÊTE ════════ -->
 <header class="head">
   <div class="wrap head__in">
-    <a class="brand" href="#top">
-      <span class="brand__mark" aria-hidden="true">
-        <img src="assets/logo-royaume.png" alt="" width="342" height="132">
+    <a class="brand" href="/">
+      <span class="brand__mark">
+        <img src="assets/logo-sidi-belyout.png" alt="Arrondissement de Sidi Belyout" width="1000" height="790">
       </span>
       <span class="brand__txt">
         <span class="brand__name" data-t="brand">Sidi Belyout</span>
@@ -988,7 +996,7 @@ html[lang="ar"] .foot__newsSoon{letter-spacing:0}
 </header>
 
 <!-- ════════ HERO ════════ -->
-<section class="hero" id="top">
+<section class="hero">
   <div class="hero__sky" aria-hidden="true"></div>
   <div class="hero__media" aria-hidden="true">
     <video id="heroVid" autoplay muted loop playsinline preload="none" poster="assets/hero-poster.jpg">
@@ -1000,11 +1008,6 @@ html[lang="ar"] .foot__newsSoon{letter-spacing:0}
     <span class="eyebrow" data-t="eyebrow">Arrondissement de Sidi Belyout</span>
     <h1 data-t="heroTitle">Votre arrondissement,<br>à portée de main.</h1>
     <p class="hero__lead" data-t="heroLead">Trouvez un service, une démarche ou un équipement près de chez vous. Appelez, ou lancez l'itinéraire.</p>
-
-    <p class="hero__note">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm1-13h-2v2h2Zm0 4h-2v6h2Z"/></svg>
-      <span data-t="heroNote">Positions des annexes provisoires - à valider par l'arrondissement.</span>
-    </p>
   </div>
 </section>
 
@@ -1073,7 +1076,7 @@ html[lang="ar"] .foot__newsSoon{letter-spacing:0}
     </div>
     <div class="agenda" id="news"></div>
     <div class="actus__more">
-      <a class="actus__btn" href="#actus" data-t="actusAll">Voir toutes les actualités</a>
+      <button class="actus__btn" type="button" aria-expanded="false" aria-controls="news">Voir toutes les actualités</button>
     </div>
   </div>
 </section>
@@ -1087,7 +1090,7 @@ html[lang="ar"] .foot__newsSoon{letter-spacing:0}
     </div>
     <div class="agenda" id="agenda-grid"></div>
     <div class="agenda__more">
-      <span class="agenda__btn" aria-disabled="true" data-t="agendaAll">Voir tout l'agenda</span>
+      <button class="agenda__btn" type="button" aria-expanded="false" aria-controls="agenda-grid">Voir tout l'agenda</button>
     </div>
   </div>
 </section>
@@ -1100,21 +1103,12 @@ html[lang="ar"] .foot__newsSoon{letter-spacing:0}
       <h2 data-t="projetsH">Visualiser un aménagement avant sa réalisation</h2>
     </div>
 
-    <div class="projet">
-      <div class="projet__media">
-        <video id="projetVid" autoplay muted loop playsinline preload="metadata" poster="assets/projet-exemple-poster.jpg">
-          <source src="assets/projet-exemple.mp4" type="video/mp4">
-        </video>
-        <span class="projet__badge">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0ZM13 9h-2v5h2Zm0 7h-2v2h2Z"/></svg>
-          <span data-t="projetBadge">Exemple de rendu - projet fictif, à titre de démonstration</span>
-        </span>
-      </div>
-      <div class="projet__panel">
-        <h3 class="projet__title" id="projTitle">-</h3>
-        <p class="projet__lead" id="projLead">-</p>
-        <div class="projet__points" id="projPoints"></div>
-      </div>
+    <div class="projet__soon">
+      <span class="projet__soonIco" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM11 7h2v5.6l3.5 2-1 1.7L11 13.5Z"/></svg>
+      </span>
+      <p class="projet__soonBadge" data-t="projetSoonBadge">En préparation</p>
+      <p class="projet__soonText" data-t="projetSoonText">Cette rubrique présentera prochainement les projets d'aménagement de l'arrondissement : nouveaux espaces publics, rues réaménagées, places rénovées, avec un aperçu du rendu avant les travaux.</p>
     </div>
   </div>
 </section>
@@ -1129,7 +1123,7 @@ html[lang="ar"] .foot__newsSoon{letter-spacing:0}
       </div>
       <div class="foot__contact" id="footContact"></div>
       <div class="foot__side">
-        <p data-t="footNote">Démonstration - les données affichées proviennent de sources publiques et doivent être validées par l'arrondissement avant toute mise en ligne. Les numéros d'urgence sont à vérifier.</p>
+        <p data-t="footNote">Portail officiel de l'arrondissement de Sidi Belyout, préfecture de Casablanca-Anfa.</p>
       </div>
     </div>
 
@@ -1147,7 +1141,7 @@ html[lang="ar"] .foot__newsSoon{letter-spacing:0}
         </div>
       </div>
       <div class="foot__social" role="group" aria-label="Réseaux sociaux">
-        <a class="foot__socialBtn" href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+        <a class="foot__socialBtn" href="https://www.facebook.com/ArrondissementSidiBelyout1" target="_blank" rel="noopener" aria-label="Page Facebook de l'arrondissement de Sidi Belyout">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12Z"/></svg>
         </a>
         <a class="foot__socialBtn" href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
@@ -1160,9 +1154,9 @@ html[lang="ar"] .foot__newsSoon{letter-spacing:0}
     </div>
 
     <div class="foot__bar">
-      <span data-t="footLegal">Maquette de présentation - non contractuelle</span>
-      <span data-t="footMentions">Mentions légales</span>
-      <span data-t="footConfid">Politique de confidentialité</span>
+      <span data-t="footLegal">© 2026 Arrondissement de Sidi Belyout</span>
+      <a href="mentions-legales.html" data-t="footMentions">Mentions légales</a>
+      <a href="confidentialite.html" data-t="footConfid">Politique de confidentialité</a>
       <span data-t="footTech">Carte : OpenStreetMap</span>
     </div>
   </div>

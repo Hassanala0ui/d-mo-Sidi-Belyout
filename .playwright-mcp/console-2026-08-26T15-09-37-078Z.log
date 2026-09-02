@@ -1,2 +1,0 @@
-[      46ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8745/assets/hero-poster.jpg:0
-[     213ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8745/assets/timelapse.mp4:0

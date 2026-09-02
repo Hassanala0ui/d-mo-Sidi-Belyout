@@ -1,0 +1,23 @@
+# ── Système ────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Logs et fichiers temporaires ───────────────────────
+*.log
+*.tmp
+
+# ── Dépendances / build (au cas où on ajoute un build) ─
+node_modules/
+dist/
+.cache/
+
+# ── Outils d'automatisation et d'agents ────────────────
+.playwright-mcp/
+.agents/
+skills-lock.json
+
+# ── Matériel de travail : gardé en local, hors dépôt ───
+#   (captures d'inspiration, photos sources, captures de test)
+references/
+screens/

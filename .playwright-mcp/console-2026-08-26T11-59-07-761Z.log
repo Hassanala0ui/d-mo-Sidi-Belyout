@@ -1,7 +1,0 @@
-[      51ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8743/assets/hero-poster.jpg:0
-[     223ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8743/assets/timelapse.mp4:0
-[     308ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8743/favicon.ico:0
-[   31581ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8743/assets/hero-poster.jpg:0
-[   31635ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8743/assets/timelapse.mp4:0
-[   33577ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8743/assets/hero-poster.jpg:0
-[   33632ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8743/assets/timelapse.mp4:0

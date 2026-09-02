@@ -12,19 +12,21 @@ const T = {
     eyebrow:"Arrondissement de Sidi Belyout",
     heroTitle:"Votre arrondissement,<br>à portée de main.",
     heroLead:"Trouvez un service, une démarche ou un équipement près de chez vous. Appelez, ou lancez l'itinéraire.",
-    heroNote:"Positions des annexes provisoires - à valider par l'arrondissement.",
     ebAnnexe:"Mon quartier", annexeH:"Les services autour de vous",
     annexeP:"Choisissez votre quartier ci-dessus : la liste et la carte s'adaptent immédiatement.",
     ebCarte:"Carte interactive", carteH:"Localiser un service",
     carteP:"Filtrez par catégorie ou par quartier. Cliquez sur un point pour voir sa fiche complète.",
-    ebActus:"Actualités", actusH:"La vie de l'arrondissement", publishedOn:"Publié le",
+    ebActus:"Actualités", actusH:"La vie de l'arrondissement", publishedOn:"Publié le", sourceLabel:"Source :",
     actusAll:"Voir toutes les actualités",
-    ebAgenda:"Agenda", agendaH:"Ce qui se passe près de chez vous", agendaAll:"Voir tout l'agenda",
+    voirMoins:"Voir moins",
+    ebAgenda:"Agenda", agendaH:"Ce qui se passe près de chez vous", agendaAll:"Voir tout l'agenda", until:"Jusqu'au",
     ebProjets:"Projets", projetsH:"Visualiser un aménagement avant sa réalisation",
-    projetBadge:"Exemple de rendu - projet fictif, à titre de démonstration",
+    projetSoonBadge:"En préparation",
+    projetSoonText:"Cette rubrique présentera prochainement les projets d'aménagement de l'arrondissement : nouveaux espaces publics, rues réaménagées, places rénovées, avec un aperçu du rendu avant les travaux.",
     footTag:"Votre arrondissement. Vos services. Votre proximité.",
-    footNote:"Démonstration - les données affichées proviennent de sources publiques et doivent être validées par l'arrondissement avant toute mise en ligne. Les numéros d'urgence sont à vérifier.",
-    footLegal:"Maquette de présentation - non contractuelle",
+    footNote:"Portail officiel de l'arrondissement de Sidi Belyout, préfecture de Casablanca-Anfa.",
+    footLegal:"© 2026 Arrondissement de Sidi Belyout",
+    footEmailT:"E-mail",
     footTech:"Carte : OpenStreetMap",
     footContactT:"Contact", footHoursT:"Horaires", footAddrT:"Adresse",
     footMentions:"Mentions légales", footConfid:"Politique de confidentialité",
@@ -37,6 +39,7 @@ const T = {
     address:"Adresse", phone:"Téléphone", hours:"Horaires", about:"Informations", annexe:"Annexe",
     noPhone:"Non communiqué",
     emptyList:"Aucun service ne correspond à cette recherche.",
+    emptySection:"Rien à afficher pour le moment.",
     langBtn:"العربية",
     themeLight:"Mode sombre", themeDark:"Mode clair"
   },
@@ -48,19 +51,21 @@ const T = {
     eyebrow:"مقاطعة سيدي بليوط",
     heroTitle:"مقاطعتكم،<br>في متناول يدكم.",
     heroLead:"اعثروا على خدمة أو إجراء أو مرفق بالقرب منكم. اتصلوا، أو انطلقوا في الاتجاه.",
-    heroNote:"مواقع الملحقات مؤقتة - في انتظار مصادقة المقاطعة.",
     ebAnnexe:"حيّي", annexeH:"الخدمات من حولكم",
     annexeP:"اختاروا حيّكم أعلاه: تتكيف اللائحة والخريطة على الفور.",
     ebCarte:"الخريطة التفاعلية", carteH:"تحديد موقع خدمة",
     carteP:"صفّوا حسب الفئة أو الحي. انقروا على نقطة لعرض بطاقتها الكاملة.",
-    ebActus:"الأخبار", actusH:"حياة المقاطعة", publishedOn:"نُشر بتاريخ",
+    ebActus:"الأخبار", actusH:"حياة المقاطعة", publishedOn:"نُشر بتاريخ", sourceLabel:"المصدر:",
     actusAll:"عرض جميع الأخبار",
-    ebAgenda:"الأجندة", agendaH:"ما يقع بالقرب منكم", agendaAll:"عرض كامل الأجندة",
+    voirMoins:"عرض أقل",
+    ebAgenda:"الأجندة", agendaH:"ما يقع بالقرب منكم", agendaAll:"عرض كامل الأجندة", until:"إلى غاية",
     ebProjets:"المشاريع", projetsH:"تصوّر مشروع قبل إنجازه",
-    projetBadge:"نموذج توضيحي - مشروع افتراضي لأغراض العرض فقط",
+    projetSoonBadge:"قيد الإعداد",
+    projetSoonText:"ستعرض هذه الفقرة قريباً مشاريع تهيئة المقاطعة: فضاءات عمومية جديدة، شوارع معاد تهيئتها، ساحات مجددة، مع لمحة عن النتيجة قبل انطلاق الأشغال.",
     footTag:"مقاطعتكم. خدماتكم. قربكم.",
-    footNote:"نموذج تجريبي - المعطيات المعروضة مستقاة من مصادر عمومية ويجب أن تصادق عليها المقاطعة قبل النشر. أرقام الطوارئ تحتاج إلى تأكيد.",
-    footLegal:"نموذج للعرض - غير تعاقدي",
+    footNote:"البوابة الرسمية لمقاطعة سيدي بليوط، عمالة الدار البيضاء أنفا.",
+    footLegal:"© 2026 مقاطعة سيدي بليوط",
+    footEmailT:"البريد الإلكتروني",
     footTech:"الخريطة: OpenStreetMap",
     footContactT:"اتصال", footHoursT:"التوقيت", footAddrT:"العنوان",
     footMentions:"الإشعار القانوني", footConfid:"سياسة الخصوصية",
@@ -73,17 +78,29 @@ const T = {
     address:"العنوان", phone:"الهاتف", hours:"التوقيت", about:"معلومات", annexe:"الملحقة",
     noPhone:"غير متوفر",
     emptyList:"لا توجد خدمة تطابق هذا البحث.",
+    emptySection:"لا يوجد ما يُعرض حالياً.",
     langBtn:"Français",
     themeLight:"الوضع الليلي", themeDark:"الوضع النهاري"
   }
 };
 
 /* ── 2. État ────────────────────────────────────────────── */
-let L_ = "fr";                 // locale
+/* Accès au stockage local tolérant aux pannes (navigation privée, quota,
+   stockage désactivé) : ne jette jamais, renvoie null en lecture. */
+const STORE = {
+  get(k){ try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v){ try { localStorage.setItem(k, v); } catch (e) {} }
+};
+
+const savedLang = STORE.get("sb-lang");
+let L_ = savedLang === "ar" ? "ar" : "fr";   // locale (mémorisée)
 let annexeId = ANNEXES[0].id;  // annexe sélectionnée
 let anCatFilter = "all";       // filtre catégorie, section "Mon quartier" uniquement
 let catId = "all";             // filtre catégorie, carte interactive
 let query = "";                // recherche
+
+const SECTION_LIMIT = 4;       // cartes visibles avant « voir tout » (Actualités et Agenda)
+let agendaCount = 0;           // nb d'événements réellement affichés (après filtre « à venir »)
 
 const $  = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
@@ -111,6 +128,7 @@ const ICONS = {
   map:'<path d="M9 3 3 5v16l6-2 6 2 6-2V3l-6 2-6-2Z"/>',
   clock:'<path fill-rule="evenodd" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM11 7h2v5.6l3.5 2-1 1.7L11 13.5Z"/>',
   info:'<path fill-rule="evenodd" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm1-13h-2v2h2Zm0 4h-2v6h2Z"/>',
+  mail:'<path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1.4 2L12 12.2 18.6 7ZM5 8.6V17h14V8.6l-6.4 5.1a1 1 0 0 1-1.2 0Z"/>',
   chevron:'<path d="M8 4l8 8-8 8Z"/>',
   check:'<path d="M9 16.2 4.8 12l-1.4 1.4L9 19 20.6 7.4l-1.4-1.4Z"/>'
 };
@@ -121,14 +139,29 @@ const svg = (n, s=20) =>
 const cat     = id => CATEGORIES.find(c => c.id === id);
 const annexe  = id => ANNEXES.find(a => a.id === id);
 const catName = id => (cat(id) || {})[L_] || "";
-const fmtDate = iso => new Date(iso)
-  .toLocaleDateString(L_ === "ar" ? "ar-MA-u-ca-gregory-nu-latn" : "fr-FR", { day:"numeric", month:"long", year:"numeric" });
+const dateLocale = () => L_ === "ar" ? "ar-MA-u-ca-gregory-nu-latn" : "fr-FR";
+const fmtDate = iso => {
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return "";
+  return d.toLocaleDateString(dateLocale(), { day:"numeric", month:"long", year:"numeric" });
+};
 const fmtDayMonth = iso => {
   const d = new Date(iso);
+  if (isNaN(d.getTime())) return { day:"", month:"" };
   const day = String(d.getDate()).padStart(2, "0");
-  const month = d.toLocaleDateString(L_ === "ar" ? "ar-MA-u-ca-gregory-nu-latn" : "fr-FR", { month:"long" });
+  const month = d.toLocaleDateString(dateLocale(), { month:"long" });
   return { day, month };
 };
+
+/* Date du jour au format ISO court, pour comparer aux dates "YYYY-MM-DD"
+   des événements (comparaison de chaînes, ordre lexicographique = ordre réel). */
+const todayISO = () => {
+  const d = new Date();
+  const p = n => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+};
+const byDateAsc  = (a, b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
+const byDateDesc = (a, b) => byDateAsc(b, a);
 
 function servicesOf(aId){ return SERVICES.filter(s => s.annexe === aId); }
 
@@ -157,8 +190,7 @@ function applyLocale(){
   $("#q").placeholder = t("search");
   $("#langTxt").textContent = t("langBtn");
   $("#langTxtShort").textContent = L_ === "fr" ? "AR" : "FR";
-  $("#themeBtn").setAttribute("aria-label",
-    document.documentElement.dataset.theme === "dark" ? t("themeDark") : t("themeLight"));
+  syncThemeButton();
 
   renderUrgences();
   renderQCards();
@@ -168,7 +200,6 @@ function applyLocale(){
   renderFilters();
   renderNews();
   renderAgenda();
-  renderProjet();
   renderFooter();
   renderMarkers();
 }
@@ -363,7 +394,13 @@ function renderFilters(){
 }
 
 function renderNews(){
-  renderEventGrid("#news", ACTUS, { icon:"rss", dated:"line" });
+  /* Vraies actualités d'abord (plus récente en tête), puis celles marquées
+     `placeholder` reléguées en fin de liste - donc dans « voir plus ». */
+  const items = [...ACTUS].sort((a, b) =>
+    (a.placeholder ? 1 : 0) - (b.placeholder ? 1 : 0) || byDateDesc(a, b)
+  );
+  renderEventGrid("#news", items, { icon:"rss", dated:"line", limit:SECTION_LIMIT });
+  syncActusBtn();
 }
 
 function renderFooter(){
@@ -372,6 +409,12 @@ function renderFooter(){
   if (!box || !s) return;
   const phoneHref = s.phone ? "tel:" + s.phone : null;
   const phoneTxt = s.phone ? s.phone.replace(/(\d{2})(?=\d)/g,"$1 ").trim() : t("noPhone");
+  const emailCol = s.email
+    ? `<div class="foot__col">
+         <h4>${t("footEmailT")}</h4>
+         <p><a href="mailto:${s.email}" dir="ltr">${s.email}</a></p>
+       </div>`
+    : "";
   box.innerHTML =
     `<div class="foot__col">
        <h4>${t("footContactT")}</h4>
@@ -384,14 +427,24 @@ function renderFooter(){
      <div class="foot__col">
        <h4>${t("footAddrT")}</h4>
        <p>${s[L_].address}</p>
-     </div>`;
+     </div>
+     ${emailCol}`;
 }
 
 /* Carte commune à l'Agenda (à venir, date en badge) et aux Actualités
-   (déjà publiées, date en pied de carte) - même structure, même gabarit. */
-function renderEventGrid(sel, items, { icon, dated }){
+   (déjà publiées, date en pied de carte) - même structure, même gabarit.
+   `limit` : nombre de cartes visibles d'emblée (vedette comprise) ; au-delà,
+   les cartes reçoivent .ag--extra et ne s'affichent qu'une fois la section
+   dépliée via « Voir toutes les actualités ». */
+function renderEventGrid(sel, items, { icon, dated, limit }){
   const box = $(sel);
+  if (!box) return;
   box.innerHTML = "";
+
+  if (!Array.isArray(items) || items.length === 0){
+    box.innerHTML = `<p class="empty">${t("emptySection")}</p>`;
+    return;
+  }
 
   const card = (e, cls) => {
     const hasPhoto = !!e.photo;
@@ -402,11 +455,15 @@ function renderEventGrid(sel, items, { icon, dated }){
       : `<span class="ag__ico">${svg(icon, cls === "ag--feat" ? 24 : 18)}</span>`;
     let dateBadge = "";
     if (dated === "badge") {
-      const { day, month } = fmtDayMonth(e.date);
-      dateBadge = `<p class="ag__date"><span class="num">${day}</span> ${month}</p>`;
+      const now = todayISO();
+      const ongoing = e.dateEnd && e.date <= now && e.dateEnd >= now;
+      const { day, month } = fmtDayMonth(ongoing ? e.dateEnd : e.date);
+      const prefix = ongoing ? `${t("until")} ` : "";
+      dateBadge = `<p class="ag__date">${prefix}<span class="num">${day}</span> ${month}</p>`;
     }
     const lieu = e[L_].lieu ? `<p class="ag__lieu">${svg("pin", 13)}<span>${e[L_].lieu}</span></p>` : "";
     const publiee = dated === "line" ? `<p class="ag__pub num">${t("publishedOn")} ${fmtDate(e.date)}</p>` : "";
+    const source = e.source ? `<p class="ag__src">${t("sourceLabel")} ${e.source}</p>` : "";
     el.innerHTML =
       media +
       `<div class="ag__body">
@@ -414,7 +471,7 @@ function renderEventGrid(sel, items, { icon, dated }){
          <span class="ag__tag">${e.cat[L_]}</span>
          <h3 class="ag__t">${e[L_].t}</h3>
          <p class="ag__d">${e[L_].d}</p>
-         ${lieu}${publiee}
+         ${lieu}${publiee}${source}
        </div>`;
     return el;
   };
@@ -423,31 +480,60 @@ function renderEventGrid(sel, items, { icon, dated }){
   box.appendChild(card(feat, "ag--feat"));
   const list = document.createElement("div");
   list.className = "ag__list";
-  rest.forEach(e => list.appendChild(card(e, "ag--sm")));
+  rest.forEach((e, i) => {
+    const el = card(e, "ag--sm");
+    if (limit && i + 1 >= limit) el.classList.add("ag--extra");
+    list.appendChild(el);
+  });
   box.appendChild(list);
+
+  /* Repli si une photo d'actualité ou d'agenda est absente (404) : on retire
+     la vignette et on affiche l'icône de rubrique, sans casser la mise en page. */
+  box.querySelectorAll(".ag__media img").forEach(img => {
+    img.addEventListener("error", () => {
+      const ag = img.closest(".ag");
+      if (!ag) return;
+      ag.classList.remove("ag--photo");
+      const span = document.createElement("span");
+      span.className = "ag__ico";
+      span.innerHTML = svg(icon, ag.classList.contains("ag--feat") ? 24 : 18);
+      const wrap = ag.querySelector(".ag__media");
+      if (wrap) wrap.replaceWith(span);
+    }, { once: true });
+  });
 }
 
 function renderAgenda(){
-  renderEventGrid("#agenda-grid", EVENEMENTS, { icon:"calendar", dated:"badge" });
+  /* Agenda : événements à venir en premier, du plus proche au plus lointain.
+     Si tous sont passés, on retombe sur la liste complète triée plutôt que
+     d'afficher une section vide. */
+  const today = todayISO();
+  /* Un événement reste "à venir" tant que sa date de fin (ou sa date unique)
+     n'est pas dépassée : une exposition de plusieurs mois reste affichée. */
+  const upcoming = EVENEMENTS.filter(e => (e.dateEnd || e.date) >= today);
+  const sorted = (upcoming.length ? upcoming : [...EVENEMENTS]).sort(byDateAsc);
+  /* Un événement marqué `featured` passe en tête (carte vedette), le reste
+     suit dans l'ordre chronologique. */
+  const items = [...sorted.filter(e => e.featured), ...sorted.filter(e => !e.featured)];
+  agendaCount = items.length;
+  renderEventGrid("#agenda-grid", items, { icon:"calendar", dated:"badge", limit:SECTION_LIMIT });
+  syncAgendaBtn();
 }
 
-function renderProjet(){
-  const p = PROJET_EXEMPLE[L_];
-  $("#projTitle").textContent = p.titre;
-  $("#projLead").textContent = p.texte;
-  const box = $("#projPoints");
-  box.innerHTML = "";
-  p.points.forEach(pt => {
-    const d = document.createElement("div");
-    d.className = "projet__point";
-    d.innerHTML = `<b>${pt.t}</b><span>${pt.d}</span>`;
-    box.appendChild(d);
-  });
-}
 
 /* ── 7. Cartes ──────────────────────────────────────────── */
 const TILES = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 const ATTR  = '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+
+/* Centre de carte par défaut : barycentre des annexes, jamais une valeur
+   codée en dur. Couleur de repli des marqueurs : la couleur de marque lue
+   sur les variables CSS. */
+const MAP_CENTER = [
+  ANNEXES.reduce((s, a) => s + a.lat, 0) / ANNEXES.length,
+  ANNEXES.reduce((s, a) => s + a.lng, 0) / ANNEXES.length
+];
+const BRAND_COLOR =
+  getComputedStyle(document.documentElement).getPropertyValue("--navy").trim() || "#0C7A5F";
 
 let map, anMap, shMap, layer;
 
@@ -481,7 +567,7 @@ function clusterIcon(cluster){
 
 function initMaps(){
   map = L.map("map", { scrollWheelZoom:false, zoomControl:true })
-        .setView([33.5955, -7.6210], 14);
+        .setView(MAP_CENTER, 14);
   L.tileLayer(TILES, { attribution:ATTR, maxZoom:19 }).addTo(map);
   layer = L.markerClusterGroup({
     iconCreateFunction: clusterIcon,
@@ -491,7 +577,7 @@ function initMaps(){
   }).addTo(map);
 
   anMap = L.map("anMap", { scrollWheelZoom:false, zoomControl:true, attributionControl:false })
-          .setView([33.5955, -7.6210], 14);
+          .setView(MAP_CENTER, 14);
   L.tileLayer(TILES, { maxZoom:19 }).addTo(anMap);
 
   renderMarkers();
@@ -514,7 +600,7 @@ function renderMarkers(){
   // services
   filtered().forEach(s => {
     const a = annexe(s.annexe);
-    L.marker([s.lat, s.lng], { icon: pinIcon(a ? a.accent : "#0C7A5F", cat(s.cat).icon) })
+    L.marker([s.lat, s.lng], { icon: pinIcon(a ? a.accent : BRAND_COLOR, cat(s.cat).icon) })
       .bindPopup(
         `<span class="pop__c">${catName(s.cat)}</span>
          <div class="pop__n">${s[L_].name}</div>
@@ -563,6 +649,13 @@ function selectAnnexe(id){
 }
 
 /* ── 9. Fiche service ───────────────────────────────────── */
+let sheetReturnFocus = null;   // élément à re-focaliser à la fermeture
+
+/* Éléments de page neutralisés (clavier + souris) tant que la fiche est ouverte. */
+function sheetBackground(){
+  return [$(".head"), ...$$("body > section"), $(".foot")].filter(Boolean);
+}
+
 function openSheet(id){
   const s = SERVICES.find(x => x.id === id);
   if (!s) return;
@@ -583,6 +676,7 @@ function openSheet(id){
     line("pin",   t("address"), s[L_].address) +
     line("clock", t("hours"),   s[L_].hours) +
     line("phone", t("phone"),   s.phone ? s.phone.replace(/(\d{2})(?=\d)/g,"$1 ").trim() : t("noPhone"), !!s.phone) +
+    (s.email ? line("mail", t("footEmailT"), `<a href="mailto:${s.email}" dir="ltr">${s.email}</a>`) : "") +
     line("home",  t("annexe"),  a ? a[L_].name : "-") +
     line("info",  t("about"),   s[L_].note);
 
@@ -594,15 +688,17 @@ function openSheet(id){
   $("#shFlag").hidden = !!s.verified;
 
   const sh = $("#sheet");
+  sheetReturnFocus = document.activeElement;
   sh.setAttribute("open","");
   document.body.style.overflow = "hidden";
+  sheetBackground().forEach(el => el.setAttribute("inert", ""));
 
   setTimeout(() => {
     if (shMap){ shMap.remove(); shMap = null; }
     shMap = L.map("shMap", { scrollWheelZoom:false, zoomControl:false, attributionControl:false })
             .setView([s.lat, s.lng], 16);
     L.tileLayer(TILES, { maxZoom:19 }).addTo(shMap);
-    L.marker([s.lat, s.lng], { icon: pinIcon(a ? a.accent : "#0C7A5F", cat(s.cat).icon) }).addTo(shMap);
+    L.marker([s.lat, s.lng], { icon: pinIcon(a ? a.accent : BRAND_COLOR, cat(s.cat).icon) }).addTo(shMap);
     shMap.invalidateSize();
   }, 60);
 
@@ -610,22 +706,54 @@ function openSheet(id){
 }
 
 function closeSheet(){
-  $("#sheet").removeAttribute("open");
+  const sh = $("#sheet");
+  if (!sh.hasAttribute("open")) return;
+  sh.removeAttribute("open");
   document.body.style.overflow = "";
+  sheetBackground().forEach(el => el.removeAttribute("inert"));
   if (shMap){ shMap.remove(); shMap = null; }
+  if (sheetReturnFocus && typeof sheetReturnFocus.focus === "function") sheetReturnFocus.focus();
+  sheetReturnFocus = null;
 }
 
+/* Piège de focus : Tab et Maj+Tab bouclent à l'intérieur de la fiche ouverte. */
+document.addEventListener("keydown", e => {
+  if (e.key !== "Tab") return;
+  const sh = $("#sheet");
+  if (!sh.hasAttribute("open")) return;
+  const focusables = [...sh.querySelectorAll('a[href], button:not([disabled]), input, [tabindex]:not([tabindex="-1"])')]
+    .filter(el => el.offsetParent !== null && el.getAttribute("aria-disabled") !== "true");
+  if (!focusables.length) return;
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+});
+
 /* ── 10. Branchements ───────────────────────────────────── */
-$("#langBtn").onclick = () => { L_ = L_ === "fr" ? "ar" : "fr"; applyLocale(); };
+$("#langBtn").onclick = () => {
+  L_ = L_ === "fr" ? "ar" : "fr";
+  STORE.set("sb-lang", L_);
+  applyLocale();
+};
+
+/* Aligne l'icône et le libellé du bouton thème sur l'état réel du document
+   (source unique, appelée au démarrage et à chaque bascule). */
+function syncThemeButton(){
+  const dark = document.documentElement.dataset.theme === "dark";
+  const btn = $("#themeBtn"), ico = $("#themeIco");
+  if (!btn || !ico) return;
+  btn.setAttribute("aria-label", dark ? t("themeDark") : t("themeLight"));
+  ico.innerHTML = dark
+    ? '<circle cx="12" cy="12" r="4.5"/><rect x="11" y="1" width="2" height="3" rx="1"/><rect x="11" y="20" width="2" height="3" rx="1"/><rect x="20" y="11" width="3" height="2" rx="1"/><rect x="1" y="11" width="3" height="2" rx="1"/>'
+    : '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>';
+}
 
 $("#themeBtn").onclick = () => {
   const h = document.documentElement;
-  const dark = h.dataset.theme === "dark";
-  h.dataset.theme = dark ? "light" : "dark";
-  $("#themeBtn").setAttribute("aria-label", dark ? t("themeLight") : t("themeDark"));
-  $("#themeIco").innerHTML = dark
-    ? '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>'
-    : '<circle cx="12" cy="12" r="4.5"/><rect x="11" y="1" width="2" height="3" rx="1"/><rect x="11" y="20" width="2" height="3" rx="1"/><rect x="20" y="11" width="3" height="2" rx="1"/><rect x="1" y="11" width="3" height="2" rx="1"/>';
+  h.dataset.theme = h.dataset.theme === "dark" ? "light" : "dark";
+  STORE.set("sb-theme", h.dataset.theme);
+  syncThemeButton();
 };
 
 /* ── Méga-menu ──────────────────────────────────────────── */
@@ -644,8 +772,9 @@ megaTriggers.forEach(b => {
 });
 document.addEventListener("keydown", e => {
   if (e.key !== "Escape") return;
+  if ($("#sheet").hasAttribute("open")){ closeSheet(); return; }
   const open = megaTriggers.find(b => b.getAttribute("aria-expanded") === "true");
-  if (open){ closeMega(open); open.focus(); }
+  if (open){ closeMega(open); open.focus(); return; }
   if (navBurger.getAttribute("aria-expanded") === "true"){ closeMobileNav(); navBurger.focus(); }
 });
 document.addEventListener("click", e => {
@@ -706,24 +835,60 @@ mobileNav.addEventListener("click", e => {
 
 $("#anMapReset").onclick = () => { fitAnMap(); anMap.invalidateSize(); };
 
+/* Le lien du logo ramène simplement en haut de page, sans écrire d'ancre
+   dans l'URL. Si une ancre de section (#carte, #actus...) y figure déjà,
+   on la retire sans recharger ni empiler d'entrée d'historique. */
+const brandLink = $(".brand");
+if (brandLink){
+  brandLink.addEventListener("click", e => {
+    e.preventDefault();
+    if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+    const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top:0, behavior: smooth ? "smooth" : "auto" });
+  });
+}
+
+/* Sections « voir tout / voir moins » : Actualités et Agenda affichent
+   SECTION_LIMIT cartes, le reste est replié derrière le bouton. L'état déplié
+   est porté par la <section> (jamais reconstruite), il survit donc au
+   changement de langue ; le libellé du bouton, lui, suit la locale.
+   Renvoie une fonction sync() à rappeler après chaque rendu. */
+function makeShowMore(sectionSel, btnSel, moreKey, getTotal){
+  const btn = $(btnSel);
+  if (!btn) return () => {};
+  const sec = $(sectionSel);
+  const listId = sec ? ((sec.querySelector("[id]") || {}).id || "") : "";
+  if (listId) btn.setAttribute("aria-controls", listId);
+  const sync = () => {
+    if (!sec) return;
+    if (btn.parentElement) btn.parentElement.hidden = getTotal() <= SECTION_LIMIT;
+    const open = sec.classList.contains("sec--show-all");
+    btn.textContent = open ? t("voirMoins") : t(moreKey);
+    btn.setAttribute("aria-expanded", String(open));
+  };
+  btn.addEventListener("click", () => { sec.classList.toggle("sec--show-all"); sync(); });
+  return sync;
+}
+const syncActusBtn  = makeShowMore("#actus",  ".actus__btn",  "actusAll",  () => ACTUS.length);
+const syncAgendaBtn = makeShowMore("#agenda", ".agenda__btn", "agendaAll", () => agendaCount);
+
 $("#q").addEventListener("input", e => { query = e.target.value; renderMarkers(); });
 
 $$("[data-close]").forEach(el => el.onclick = closeSheet);
-document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet(); });
 
-/* Si la vidéo est absente, on garde le ciel animé en repli */
-const vid = $("#heroVid");
-vid.addEventListener("error", () => vid.style.display = "none", true);
-if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) vid.removeAttribute("autoplay");
-
-/* Même repli pour la vidéo de la section Projets - si le fichier est
-   absent, le fond plein de couleur de .projet__media prend le relais
-   et le badge « exemple de démonstration » reste affiché. */
-const projVid = $("#projetVid");
-if (projVid){
-  projVid.addEventListener("error", () => projVid.style.display = "none", true);
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) projVid.removeAttribute("autoplay");
-}
+/* Repli vidéo du hero : si la source échoue ou ne se charge pas, on masque la
+   balise et le ciel animé en CSS prend le relais. L'écouteur en phase de
+   capture intercepte aussi l'échec de la balise <source>, qui ne remonte pas
+   jusqu'à la vidéo. */
+(function wireHeroVideoFallback(){
+  const video = $("#heroVid");
+  if (!video) return;
+  const hide = () => { video.style.display = "none"; };
+  video.addEventListener("error", hide, true);
+  const source = video.querySelector("source");
+  if (source) source.addEventListener("error", hide);
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) video.removeAttribute("autoplay");
+})();
 
 /* ── 11. Démarrage ──────────────────────────────────────── */
 selectAnnexe(ANNEXES[0].id);
